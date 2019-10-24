@@ -179,9 +179,6 @@ public class BackgroundWorker {
 
     public void do_array_process(String image_file) {
 
-
-
-
         this.IMAGE_FULL_PATH = image_file;
         Log.d("Filename4: ", this.IMAGE_FULL_PATH);
 
