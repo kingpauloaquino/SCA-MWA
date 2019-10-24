@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_logout_dialog_box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#cccccc"
+    tools:context="com.cheappartsguy.app.cpg.LogoutDialogBoxActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#e67e22"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_horizontal"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                android:text="LOG OUT OF YOUR ACCOUNT"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="98dp"
+                android:layout_height="84dp"
+                android:layout_gravity="center"
+                android:src="@drawable/question_mark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="CONFIRMATION"
+                    android:textColor="#e67e22"
+                    android:textSize="26dp" />
+
+                <TextView
+                    android:id="@+id/title_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="Confirming you want to log out?"
+                    android:textColor="#292929"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:layout_margin="5dp">
+            <Button
+                android:foreground="?android:attr/selectableItemBackground"
+                android:id="@+id/btn_dialog_NO"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text = "No, GO BACK"
+                android:layout_marginLeft="15dp"
+                android:background="#7f8c8d"
+                android:textSize="22sp"
+                android:padding="15dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@android:color/white"/>
+            <Button
+                android:foreground="?android:attr/selectableItemBackground"
+                android:id="@+id/btn_dialog_YES"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_height="match_parent"
+                android:text = "YES, LOGOUT"
+                android:textSize="22sp"
+                android:layout_marginRight="15dp"
+                android:padding="15dp"
+                android:textColor="@android:color/white"
+                android:background="#e67e22"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/screen_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:text="MW-199"
+                android:textColor="#292929"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

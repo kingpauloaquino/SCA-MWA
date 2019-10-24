@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_worker"
+    tools:context="com.cheappartsguy.app.cpg.SyncCATPALActivity">
+
+    <LinearLayout
+        android:id="@+id/mw_171"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_marginTop="80dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@drawable/faded_line"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCRAP CAT APP SYNCHING PROCESS"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="10dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@drawable/faded_line"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click the Start Synching button below to start the synching process."
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Synching transfers the photos and unit information from your mobile device to your ScrapCATapp account."
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-thin"
+            android:layout_marginTop="5dp"
+            />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginTop="100dp"
+            >
+
+            <TableRow android:layout_width="0dp" android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:orientation="vertical"
+                    android:background="#7f8c8d"
+                    android:layout_marginRight="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/back_to_dashboard"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BACK TO DASHBOARD"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnStartSynching"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:orientation="vertical"
+                    android:background="#2ecc71"
+                    android:layout_marginRight="10dp"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="61dp"
+                        android:layout_height="38dp"
+                        android:src="@drawable/start_syncing_min"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="START SYNCHING"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        />
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mw_170"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_marginTop="80dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@drawable/faded_line"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCRAP CAT APP SYNCHING PROCESS"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="10dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@drawable/faded_line"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SYNCING... PLEASE WAIT..."
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#eeeeee"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/txtCompletedA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:gravity="center"
+            android:textSize="65sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="COMPLETED"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="-8dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+
+            <ProgressBar
+                android:id="@+id/progressBarCompleted"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:progress="0"
+                android:max="100"
+                android:secondaryProgress="0"
+                android:progressDrawable="@drawable/progress_bar_style_1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OVERALL PROGRESS"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="-55dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="left"
+                />
+
+            <TextView
+                android:id="@+id/txtCompletedB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="-35dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:progress="0"
+                android:max="100"
+                android:secondaryProgress="0"
+                android:progressDrawable="@drawable/progress_bar_style_1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INDIVIDUAL PROGRESS"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="-55dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="left"
+                />
+
+            <TextView
+                android:id="@+id/txtIndividualProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="-35dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|center"
+        android:background="#1c1f28"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="MW-171"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:gravity="right"
+            android:id="@+id/txtScreenId" />
+    </LinearLayout>
+
+</RelativeLayout>

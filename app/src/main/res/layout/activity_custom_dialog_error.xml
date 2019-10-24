@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_custom_dialog_error"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#cccccc"
+    tools:context="com.cheappartsguy.app.cpg.customDialogErrorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--//580dp -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#b62727"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                android:text="LOG OUT OF YOUR ACCOUNT"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="98dp"
+                android:layout_height="84dp"
+                android:layout_gravity="center"
+                android:src="@drawable/exclamation_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="ERROR"
+                    android:textColor="#b62727"
+                    android:textSize="26dp" />
+
+                <TextView
+                    android:id="@+id/title_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="Username cannot be null or empty. The username cannot be validate please make sure you entered correct username."
+                    android:textColor="#292929"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/btn_dialog_DEFAULT"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="3px"
+                android:layout_weight="1"
+                android:background="#b62727"
+                android:padding="0dp"
+                android:text="OK"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:padding="15dp"
+            android:weightSum="2"
+            android:stretchColumns="*"
+            tools:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_dialog_OK"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="3px"
+                android:layout_weight="1"
+                android:background="#b62727"
+                android:padding="0dp"
+                android:text="REFRESH BOX LIST"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/btn_dialog_CANCEL"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3px"
+                android:background="#b62727"
+                android:padding="0dp"
+                android:text="CANCEL"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/screen_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:text="MW-199"
+                android:textColor="#292929"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

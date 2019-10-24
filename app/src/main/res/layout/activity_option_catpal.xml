@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cheappartsguy.app.cpg.OptionCATPALActivity">
+
+    <LinearLayout
+        android:id="@+id/option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Welcome"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_marginTop="40dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Mr. Worker"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"
+            />
+
+
+        <Button
+            android:id="@+id/btnYardList"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Which yard are you working on?"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:textSize="25dp"
+            android:background="#D15792"
+            android:textColor="#ffffff"
+            />
+
+        <Button
+            android:id="@+id/btnTool"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="What would you like to do?"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:textSize="25dp"
+            android:background="#9C58C9"
+            android:textColor="#ffffff"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

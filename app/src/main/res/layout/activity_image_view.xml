@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.cheappartsguy.app.cpg.ImageViewActivity">
+
+    <include layout="@layout/content_image_view" />
+
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top|center"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginTop="90dp"-->
+        <!--&gt;-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnEmpty"-->
+        <!--style="?android:textAppearanceSmall"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="160dp"-->
+        <!--android:text="EMPTY"-->
+        <!--android:padding="25dp"-->
+        <!--android:textSize="45dp"-->
+        <!--android:background="#871515"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textStyle="bold"-->
+        <!--android:visibility="invisible"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnUnknown"-->
+        <!--style="?android:textAppearanceSmall"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="160dp"-->
+        <!--android:text="\?"-->
+        <!--android:padding="25dp"-->
+        <!--android:textSize="45dp"-->
+        <!--android:background="#dc4b2c"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:visibility="invisible"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn14"-->
+        <!--style="?android:textAppearanceSmall"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="160dp"-->
+        <!--android:text="1/4"-->
+        <!--android:padding="25dp"-->
+        <!--android:textSize="45dp"-->
+        <!--android:background="#eed94a"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:visibility="invisible"-->
+        <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top|center"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginTop="260dp"-->
+        <!--android:layout_marginLeft="-10dp"-->
+        <!--android:visibility="invisible"-->
+        <!--&gt;-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn12"-->
+            <!--style="?android:textAppearanceSmall"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:text="1/2"-->
+            <!--android:padding="25dp"-->
+            <!--android:textSize="45dp"-->
+            <!--android:background="#126faa"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+        <!--<Button android:id="@+id/btn34"-->
+            <!--style="?android:textAppearanceSmall"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:text="3/4"-->
+            <!--android:padding="25dp"-->
+            <!--android:textSize="45dp"-->
+            <!--android:background="#f68c36"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnFull"-->
+            <!--style="?android:textAppearanceSmall"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:text="FULL"-->
+            <!--android:padding="25dp"-->
+            <!--android:textSize="45dp"-->
+            <!--android:background="#2c4b25"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<RelativeLayout android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent" android:gravity="bottom">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnBack"-->
+            <!--style="?android:textAppearanceSmall"-->
+            <!--android:layout_width="350dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Delete Image Back to Dashboard"-->
+            <!--android:padding="25dp"-->
+            <!--android:textSize="35sp"-->
+            <!--android:background="@color/btnBackground0"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_gravity="bottom|left"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/part_number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="BOX#: 1234567890"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="30sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_marginBottom="75dp"-->
+            <!--android:layout_gravity="bottom|center"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnTakePhoto"-->
+            <!--style="?android:textAppearanceSmall"-->
+            <!--android:layout_width="350dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Oops! Photo is Bad Retake Image"-->
+            <!--android:padding="25dp"-->
+            <!--android:textSize="35sp"-->
+            <!--android:background="#a11056"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
+
+
+    <!--</RelativeLayout>-->
+
+
+    <!--<Button-->
+        <!--android:id="@+id/btnUpload"-->
+        <!--style="?android:textAppearanceSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Upload"-->
+        <!--android:padding="25dp"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_marginTop="330dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:background="#D15792"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textStyle="bold" />-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab_upload"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_marginTop="0dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginRight="80dp"-->
+        <!--android:visibility="invisible"-->
+        <!--android:background="#FABE57"-->
+        <!--android:src="@android:drawable/ic_menu_send" />-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@android:drawable/ic_menu_camera" />-->
+
+</android.support.design.widget.CoordinatorLayout>

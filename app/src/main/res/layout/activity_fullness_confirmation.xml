@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/appBackgroundColor"
+    tools:context="com.cheappartsguy.app.cpg.FullnessConfirmationActivity">
+        
+        <TextView
+            android:id="@+id/txtGradedAs"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Unit Fullness Has Been Graded As"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/textColor0"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/line_separator"
+            android:layout_marginTop="75dp"
+            />
+
+        <Button
+            android:id="@+id/btnNo"
+            style="?android:textAppearanceSmall"
+            android:layout_width="420dp"
+            android:layout_height="150dp"
+            android:text="NO - Grade is not Correct - Need to Regrade"
+            android:padding="20dp"
+            android:textSize="30sp"
+            android:layout_marginTop="160dp"
+            android:background="#9b1857"
+            android:textColor="@color/btnColor0"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            />
+
+        <Button
+            android:id="@+id/btnBackToDashboard"
+            style="?android:textAppearanceSmall"
+            android:layout_width="420dp"
+            android:layout_height="150dp"
+            android:text="Yes - Save - I'm Finished - Back to Dashboard"
+            android:padding="20dp"
+            android:textSize="30sp"
+            android:layout_marginTop="160dp"
+            android:background="@color/btnBackground0"
+            android:textColor="@color/btnColor0"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            />
+
+        <Button
+            android:id="@+id/btnYesA"
+            style="?android:textAppearanceSmall"
+            android:layout_width="420dp"
+            android:layout_height="150dp"
+            android:text="Yes - Save and Add a Photo Comment"
+            android:padding="20dp"
+            android:textSize="30sp"
+            android:layout_marginTop="330dp"
+            android:textColor="@color/btnColor0"
+            android:background="#9f7720"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            />
+
+        <Button
+            android:id="@+id/btnYesB"
+            style="?android:textAppearanceSmall"
+            android:layout_width="420dp"
+            android:layout_height="150dp"
+            android:text="Yes - Save and Add a Comment"
+            android:padding="20dp"
+            android:textSize="30sp"
+            android:layout_marginTop="330dp"
+            android:background="#338db7"
+            android:textColor="@color/btnColor0"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            />
+
+        <Button
+            android:id="@+id/btnYesC"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:text="Yes Save and Add Another Unit to This Box"
+            android:padding="20dp"
+            android:textSize="30sp"
+            android:layout_marginTop="500dp"
+            android:background="#2c4b25"
+            android:textColor="@color/btnColor0"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+</RelativeLayout>

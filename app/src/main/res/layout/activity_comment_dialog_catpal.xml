@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="750dp"
+    android:layout_height="390dp"
+    android:background="@color/appBackgroundColor"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.cheappartsguy.app.cpg.CommentDialogCATPALActivity">
+
+    <Button
+        android:id="@+id/btn_dialog_CANCEL"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO COMMENT"
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:background="@color/btnBackground0"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_gravity="top|left"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <Button
+        android:id="@+id/btn_dialog_COMMENT"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save and Continue"
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:background="#2c4b25"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top|right"
+        />
+
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Message here..."
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:background="#c72071"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        />
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/text_dialog"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp"
+        android:textSize="27sp"
+        android:textColor="#1c1c1c"
+        android:background="#e0e0e0"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="10dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:hint="Tap Here to Enter Comment or Part #'s for this Unit, When done, press Save and Continue Button"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        />
+
+
+</RelativeLayout>

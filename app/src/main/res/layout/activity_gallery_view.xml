@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_gallery_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_worker"
+    tools:context="com.cheappartsguy.app.cpg.GalleryViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#1c1f28"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:id="@+id/screen_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="MW-163"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:stretchColumns="*"
+            >
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click Image to View in Full Screen"
+                    android:textSize="21sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="#ffffff"
+                    />
+
+                <TextView
+                    android:id="@+id/txtBoxId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BOX #: XXXXX"
+                    android:textSize="21sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="#ffffff"
+                    android:gravity="right"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="wrap_content"
+            android:layout_height="520dp"
+            android:drawSelectorOnTop="true"
+            android:columnWidth="150dp"
+            android:gravity="center"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_marginTop="10dp"
+            />
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:stretchColumns="*"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            >
+
+            <TableRow android:layout_width="0dp">
+
+                <LinearLayout
+                    android:id="@+id/btnBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="#7f8c8d"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:layout_marginRight="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/back_to_dashboard_min" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#ffffff"
+                        android:textSize="21dp"
+                        android:text="BACK TO DASHBOARD" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnAudit"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="#f39c11"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:layout_marginRight="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/box_audit_min" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#ffffff"
+                        android:textSize="21dp"
+                        android:text="BOX AUDIT" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnViewBoxInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="#3798dc"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/refresh_reload_min" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#ffffff"
+                        android:textSize="21dp"
+                        android:text="VIEW BOX INFORMATION" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

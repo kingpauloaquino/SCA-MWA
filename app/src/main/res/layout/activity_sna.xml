@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackgroundColor"
+    tools:context="com.cheappartsguy.app.cpg.SNAActivity">
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Message here..."
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:background="#c72071"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        />
+
+    <TextView
+        android:id="@+id/txt_sna"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:text="Please Select \n Your Next Action"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/textColor0"
+        />
+
+    <Button
+        android:id="@+id/btn_back_dashboard"
+        style="?android:textAppearanceSmall"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:text="Finished – Back to Dashboard"
+        android:padding="20dp"
+        android:textSize="25sp"
+        android:background="@color/btnBackground0"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_gravity="bottom|left"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <Button
+        android:id="@+id/btn_add_a"
+        style="?android:textAppearanceSmall"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:text="Add a Photo Comment"
+        android:padding="20dp"
+        android:textSize="25sp"
+        android:background="#9f7720"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginLeft="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|left"
+        />
+
+    <Button
+        android:id="@+id/btn_add_c"
+        style="?android:textAppearanceSmall"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:text="Add a Comment"
+        android:padding="20dp"
+        android:textSize="25sp"
+        android:background="#0f6170"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginRight="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        />
+
+    <Button
+        android:id="@+id/btn_add_b"
+        style="?android:textAppearanceSmall"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:text="Add Another Unit to this Box"
+        android:padding="20dp"
+        android:textSize="25sp"
+        android:background="#2c4b25"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        />
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_comment_box_thread"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_worker"
+    tools:context="com.cheappartsguy.app.cpg.CommentBoxThreadActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        >
+
+        <TextView
+            android:id="@+id/txtBoxId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="COMMENTS ON BOX #: XXXXXXXX"
+            android:gravity="left"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ffffff"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        >
+
+        <TextView
+            android:id="@+id/txtCommentView"
+            android:layout_width="match_parent"
+            android:layout_height="410dp"
+            android:text="Fetching...Please wait..."
+            android:gravity="left"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#1c1c1c"
+            android:background="#cccccc"
+            android:padding="10dp"
+            android:scrollbars = "vertical"
+            android:maxLines = "2000"
+            android:lineSpacingExtra="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        >
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:stretchColumns="*"
+            >
+
+            <TableRow android:layout_width="0dp">
+
+                <LinearLayout
+                    android:id="@+id/btnBack"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="#7f8c8d"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#ffffff"
+                        android:textSize="21dp"
+                        android:text="BACK TO DASHBOARD" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnWriteComment"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="#27ae61"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#ffffff"
+                        android:textSize="21dp"
+                        android:text="WRITE A COMMENT" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|center"
+        android:background="#1c1f28"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="MW-186"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:gravity="right"
+            android:id="@+id/txtScreenId" />
+    </LinearLayout>
+
+</RelativeLayout>

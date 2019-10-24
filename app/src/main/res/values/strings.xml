@@ -1,0 +1,53 @@
+<resources>
+
+    <string name="app_name">ScrapCATapp Worker</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Username (Required)</string>
+    <string name="prompt_password">Password (Required)</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="prompt_item_name">Item name (Required)</string>
+    <string name="prompt_upc_code">UPC Code (Optional)</string>
+    <string name="prompt_owner">Supplier/Owner (Optional)</string>
+    <string name="prompt_manufacturer">Manufacturer (Optional)</string>
+    <string name="prompt_model">Model or Part Number (Optional)</string>
+    <string name="prompt_weight">Weight (Kg) (Optional)</string>
+    <string name="prompt_qty">Quantity (Optional)</string>
+    <string name="title_activity_upload">CPG | Image Upload</string>
+    <string name="title_activity_image_view">CPG | Image Upload</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_search_view">SearchViewActivity</string>
+
+    <string name="width_dialog">300dp</string>
+    <string name="height_dialog">300dp</string>
+    <string name="title_activity_alert_ok">AlertOkActivity</string>
+
+    <string-array name="image_ids">
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141104.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141148.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141104.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141148.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141104.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141148.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141104.jpg</item>
+        <item>http://cheappartsguy.com:8000/CPGI/37873-205/THMB/mobile_m_IMG_20160814_141148.jpg</item>
+    </string-array>
+
+
+    <string name="add_units_yes">300dp</string>
+    <string name="title_activity_settings_a">SettingsAActivity</string>
+    <string name="forgot_password"><u>Click Here if you have forgotten password</u></string>
+    <string name="forgot_message">Please enter your <b>username</b> or <b>email address</b> below and we will send you  a link and instruction to reset your password.</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="appBackgroundColor">#282828</color>
+    <color name="colorPrimary">#4e929f</color>
+    <color name="colorPrimaryDark">#1c2533</color>
+    <color name="colorAccent">#bababa</color>
+    <color name="colorDark">#282828</color>
+
+
+    // cat pal button style
+    <color name="btnBackground0">#3d4d67</color>
+    <color name="btnColor0">#bababa</color>
+    <color name="textColor0">#bababa</color>
+
+
+    <color name="EMPTY_red">#e41501</color>
+    <color name="UNKNOWN_orange">#d54101</color>
+    <color name="ONEFOURTH_lite_orange">#fe9112</color>
+    <color name="ONEHALF_yellow">#fded04</color>
+    <color name="THREEFOURTH_blue">#0000fe</color>
+    <color name="FULL_green">#00ff01</color>
+
+</resources>

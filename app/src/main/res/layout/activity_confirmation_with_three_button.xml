@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="890dp"
+    android:layout_height="400dp"
+    android:background="@color/appBackgroundColor"
+    tools:context="com.cheappartsguy.app.cpg.ConfirmationWithThreeButtonActivity">
+
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Message here..."
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:background="#c72071"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        />
+
+    <TextView
+        android:id="@+id/text_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEXTO"
+        android:layout_below="@+id/title_dialog"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="27sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="10dp"
+        />
+
+
+    <Button
+        android:id="@+id/btn_dialog_YES"
+        style="?android:textAppearanceSmall"
+        android:layout_width="290dp"
+        android:layout_height="200dp"
+        android:text="YES, save image and continue"
+        android:padding="25dp"
+        android:textSize="35sp"
+        android:background="#a11056"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        />
+
+    <Button
+        android:id="@+id/btn_dialog_COMMENT"
+        style="?android:textAppearanceSmall"
+        android:layout_width="290dp"
+        android:layout_height="200dp"
+        android:text="Need to add \na comment"
+        android:padding="25dp"
+        android:textSize="35sp"
+        android:background="#0f6170"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        />
+
+    <Button
+        android:id="@+id/btn_dialog_NO"
+        style="?android:textAppearanceSmall"
+        android:layout_width="290dp"
+        android:layout_height="200dp"
+        android:text="NO, Go back and regrade fullness"
+        android:padding="25dp"
+        android:textSize="35sp"
+        android:background="@color/btnBackground0"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_gravity="bottom|left"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
