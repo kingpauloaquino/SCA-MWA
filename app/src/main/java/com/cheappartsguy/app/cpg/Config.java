@@ -230,6 +230,18 @@ public class Config {
         return true;
     }
 
+    public static boolean save_additiona_image(String source, String destination) {
+
+        ServiceWorker s_worker = new ServiceWorker();
+        if(!s_worker.createDirIfNotExists(destination + "/additional-photo")) {
+            return false;
+        }
+
+        dir_new_parent_folder_name = s_worker.get_file().getPath();
+        s_worker.copy(source, dir_new_parent_folder_name);
+        return true;
+    }
+
     public static ArrayList<ImageGalleryItem> ImageGalleryContainer;
 
     public static String[] ImageUrlList;

@@ -116,7 +116,6 @@ public class BackgroundWorker {
 
     // to be processed
 
-
     public boolean do_process() {
         try {
             ServiceWorker sw = new ServiceWorker();
@@ -184,8 +183,6 @@ public class BackgroundWorker {
 
         String[] splits = this.IMAGE_FULL_PATH.split("/");
         this.CATPAL_NUMBER = splits[6] + '_' + splits[7];
-//        this.UPLOAD_URL = "http://138.128.118.2:8000/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=CATPAL";
-
         this.UPLOAD_URL = Config.Images_Host + "/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=CATPAL";
 
         Log.d("IMAGE TO BE UPLOADED: ", this.IMAGE_FULL_PATH);
@@ -222,7 +219,7 @@ public class BackgroundWorker {
 
     public void RemoveToImageList(String image_file) {
         File _file = new File(image_file);
-        boolean delete_image = _file.delete(); // deleteFile(_file.getName());
+        boolean delete_image = _file.delete();
         if(delete_image) {
             Log.d("TIMER_Runnable", "Deleted " + image_file);
             return;

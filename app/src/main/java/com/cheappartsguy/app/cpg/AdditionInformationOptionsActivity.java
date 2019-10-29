@@ -76,7 +76,11 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnAddAdditionalPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                messageAlertTransfer2("This Feature is Coming Soon.", "INFORMATION");
+                ImageViewActivity.AdditionalPhotoDir = true;
+                Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);
+                startActivity(i);
+                finish();
+
             }
         });
 

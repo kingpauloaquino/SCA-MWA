@@ -149,15 +149,18 @@ public class SyncCATPALActivity extends AppCompatActivity {
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    boolean IsGranted = isStoragePermissionGranted();
-                    if (IsGranted) {
-                        do_to();
-                    } else {
-                        Toast.makeText(SyncCATPALActivity.this, "No such permission to access storage!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                }
+//                try {
+//                    boolean IsGranted = isStoragePermissionGranted();
+//                    if (IsGranted) {
+//                        do_to();
+//                    } else {
+//                        Toast.makeText(SyncCATPALActivity.this, "No such permission to access storage!", Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (Exception e) {
+//                }
+
+                BackgroundWorker bbb = new BackgroundWorker();
+                bbb.do_process();
             }
         });
 
@@ -421,18 +424,6 @@ public class SyncCATPALActivity extends AppCompatActivity {
             txtIndividualProgress.setText(progress[0] + "%");
             // updating percentage value
 
-//            if(JSONHelper.UploadedImgCount > 0) {
-//                txtCompletedA.setText(JSONHelper.UploadedImgCount + " uploaded | " +  JSONHelper.NotUploadedImgCount + " error(s).");
-//            }
-//            else {
-//                if(JSONHelper.NotUploadedImgCount > 0) {
-//                    txtStatusTemp.setText(JSONHelper.UploadedImgCount + " uploaded | " +  JSONHelper.NotUploadedImgCount + " error(s).");
-//                }
-//            }
-
-//            txtCompletedA.setText(JSONHelper.UploadedImgCount + "%");
-//            txtCompletedB.setText(JSONHelper.UploadedImgCount + "%");
-
             txtCompletedA.setText(JSONHelper.UploadedImgCount + " of " + count_allImages);
             txtCompletedB.setText(JSONHelper.UploadedImgCount + " of " + count_allImages);
             progressBarCompleted.setProgress(JSONHelper.UploadedImgCount);
@@ -602,7 +593,6 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 String[] box_uid = grade.BoxId.split("_");
                 JSONHelper json_help = new JSONHelper();
                 String xImageFile = "mobile_m_" + grade.ImageName;
-//                String url = "http://cheappartsguy.com:8090/api/upload_cats_worker_mobile/795edd365fd0e371ceaaf1ddd559a85d/"+ box_uid[1] +"/"+ xImageFile +"/"+ grade.GradeValue;
                 String url = Config.Host + "/api/upload_cats_worker_mobile/795edd365fd0e371ceaaf1ddd559a85d/" + box_uid[1] + "/" + xImageFile + "/" + grade.GradeValue;
 
                 Log.d("Response: ", "> " + Config.Seller_uid);

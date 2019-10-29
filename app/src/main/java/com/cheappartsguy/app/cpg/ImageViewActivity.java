@@ -105,6 +105,7 @@ public class ImageViewActivity extends AppCompatActivity  {
 //    public static String ImageFile = null;
 //    public static String ImageName = null;
     public static String ContentValue = null;
+    public static boolean AdditionalPhotoDir = false;
 
     public int ScreenCheckSizeIfUsing10Inches;
     public static ObjectNames notificationSizes;
@@ -319,17 +320,25 @@ public class ImageViewActivity extends AppCompatActivity  {
         }
 
         IsPreviewFullScreen = false;
-
         previewMedia(isImage);
-
         Log.d("FILE1", filePath);
 
+        if(AdditionalPhotoDir) {
+
+            Log.d("Additional-Photo", filePath);
+
+            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name)) {
+                Intent i = new Intent(getApplicationContext(), AdditionInformationOptionsActivity.class);
+                startActivity(i);
+                finish();
+            }
+            return;
+        }
+
+        Log.d("Unit-Photo", filePath);
         Intent i = new Intent(getApplicationContext(), GradeImageActivity.class);
-
         i.putExtra("ImagePath", filePath);
-
         startActivity(i);
-
         finish();
     }
     /**
@@ -387,165 +396,165 @@ public class ImageViewActivity extends AppCompatActivity  {
      * Uploading the file to server
      * */
 
-    public class createFolder extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            loaderShow("Please wait...");
-            super.onPreExecute();
-        }
+//    public class createFolder extends AsyncTask<Void, Void, String> {
+//        @Override
+//        protected void onPreExecute() {
+//            loaderShow("Please wait...");
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//            // TODO: attempt authentication against a network service.
+//            String json = null;
+//            try {
+//                Thread.sleep(100);
+//                JSONHelper json_help = new JSONHelper();
+//                String url = "http://cheappartsguy.com/mobile/create/temp/folder/" + partNumber;
+//                Log.d("Response: ", "> " + url);
+//                json = json_help.makeServiceCall(url, JSONHelper.GET);
+//                Log.d("Response: ", "> " + json);
+//                return json;
+//            } catch (InterruptedException e) {
+//            }
+//
+//            // TODO: register the new account here.
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final String json) {
+//            loaderHide();
+//            folderCreated(json);
+//        }
+//    }
 
-        @Override
-        protected String doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            String json = null;
-            try {
-                Thread.sleep(100);
-                JSONHelper json_help = new JSONHelper();
-                String url = "http://cheappartsguy.com/mobile/create/temp/folder/" + partNumber;
-                Log.d("Response: ", "> " + url);
-                json = json_help.makeServiceCall(url, JSONHelper.GET);
-                Log.d("Response: ", "> " + json);
-                return json;
-            } catch (InterruptedException e) {
-            }
+//    private void folderCreated(String json) {
+//        if (json != null) {
+//            try
+//            {
+//                JSONObject job = new JSONObject(json);
+//                String status = job.getString("Status");
+//                Log.d("Name: ", status);
+//
+//                int status200 = Integer.parseInt(status);
+//                if(status200 >= 200) {
+//                   new UploadFileToServer().execute();
+//                }
+//            }catch(Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-            // TODO: register the new account here.
-            return null;
-        }
+//    private class UploadFileToServer extends AsyncTask<Void, Integer, String> {
+//        @Override
+//        protected void onPreExecute() {
+//            // setting progress bar to zero
+//            progressBar.setProgress(0);
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Integer... progress) {
+//            // Making progress bar visible
+//            progressBar.setVisibility(View.VISIBLE);
+//            // updating progress bar value
+//            progressBar.setProgress(progress[0]);
+//            // updating percentage value
+//            upload_status.setVisibility(View.VISIBLE);
+//            upload_status.setText("Uploading... | "+String.valueOf(progress[0]) + "%");
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//            return uploadFile();
+//        }
+//
+//        @SuppressWarnings("deprecation")
+//        private String uploadFile() {
+//
+//            String urlUploadImage = "http://138.128.118.2:8000/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+partNumber+"&edited=NOT";
+//
+//            Log.d("URL_UPLOAD", urlUploadImage);
+//
+//            String responseString = null;
+//            HttpClient httpclient = new DefaultHttpClient();
+//            HttpPost httppost = new HttpPost(urlUploadImage);
+//
+//            try {
+//                AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
+//                        new ProgressListener() {
+//                            @Override
+//                            public void transferred(long num) {
+//                                publishProgress((int) ((num / (float) totalSize) * 100));
+//                            }
+//                        });
+//
+//                File sourceFile = new File(filePath);
+//                // Adding file data to http body
+//                entity.addPart("file", new FileBody(sourceFile));
+//                totalSize = entity.getContentLength();
+//                httppost.setEntity(entity);
+//                // Making server call
+//                HttpResponse response = httpclient.execute(httppost);
+//                HttpEntity r_entity = response.getEntity();
+//                int statusCode = response.getStatusLine().getStatusCode();
+//                if (statusCode == 200) {
+//                    // Server response
+//                    responseString = "Upload was successful."; //EntityUtils.toString(r_entity);
+//                } else {
+//                    responseString = "Error occurred! Http Status Code: "
+//                            + statusCode;
+//                }
+//            } catch (ClientProtocolException e) {
+//                responseString = e.toString();
+//            } catch (IOException e) {
+//                responseString = e.toString();
+//            }
+//            return responseString;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            Log.e(TAG, "Response from server: " + result);
+//            showAlert(result);
+//            super.onPostExecute(result);
+//        }
+//    }
 
-        @Override
-        protected void onPostExecute(final String json) {
-            loaderHide();
-            folderCreated(json);
-        }
-    }
-
-    private void folderCreated(String json) {
-        if (json != null) {
-            try
-            {
-                JSONObject job = new JSONObject(json);
-                String status = job.getString("Status");
-                Log.d("Name: ", status);
-
-                int status200 = Integer.parseInt(status);
-                if(status200 >= 200) {
-                   new UploadFileToServer().execute();
-                }
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private class UploadFileToServer extends AsyncTask<Void, Integer, String> {
-        @Override
-        protected void onPreExecute() {
-            // setting progress bar to zero
-            progressBar.setProgress(0);
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            // Making progress bar visible
-            progressBar.setVisibility(View.VISIBLE);
-            // updating progress bar value
-            progressBar.setProgress(progress[0]);
-            // updating percentage value
-            upload_status.setVisibility(View.VISIBLE);
-            upload_status.setText("Uploading... | "+String.valueOf(progress[0]) + "%");
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            return uploadFile();
-        }
-
-        @SuppressWarnings("deprecation")
-        private String uploadFile() {
-
-            String urlUploadImage = "http://138.128.118.2:8000/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+partNumber+"&edited=NOT";
-
-            Log.d("URL_UPLOAD", urlUploadImage);
-
-            String responseString = null;
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(urlUploadImage);
-
-            try {
-                AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
-                        new ProgressListener() {
-                            @Override
-                            public void transferred(long num) {
-                                publishProgress((int) ((num / (float) totalSize) * 100));
-                            }
-                        });
-
-                File sourceFile = new File(filePath);
-                // Adding file data to http body
-                entity.addPart("file", new FileBody(sourceFile));
-                totalSize = entity.getContentLength();
-                httppost.setEntity(entity);
-                // Making server call
-                HttpResponse response = httpclient.execute(httppost);
-                HttpEntity r_entity = response.getEntity();
-                int statusCode = response.getStatusLine().getStatusCode();
-                if (statusCode == 200) {
-                    // Server response
-                    responseString = "Upload was successful."; //EntityUtils.toString(r_entity);
-                } else {
-                    responseString = "Error occurred! Http Status Code: "
-                            + statusCode;
-                }
-            } catch (ClientProtocolException e) {
-                responseString = e.toString();
-            } catch (IOException e) {
-                responseString = e.toString();
-            }
-            return responseString;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Log.e(TAG, "Response from server: " + result);
-            showAlert(result);
-            super.onPostExecute(result);
-        }
-    }
-
-    private class SubmitContentGrade extends AsyncTask<Void, Integer, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            String json = null;
-            try {
-
-                Config.ImageName = "mobile_m_" + Config.ImageName;
-                Thread.sleep(100);
-                JSONHelper json_help = new JSONHelper();
-                String url = Config.Host + Config.Url_content_images + Config.Token + "/" + Config.get_box_id + "/" + Config.ImageName + "/" + ContentValue;
-                Log.d("Response: ", "> " + url);
-                json = json_help.makeServiceCall(url, JSONHelper.GET);
-                Log.d("Response: ", "> " + json);
-                return json;
-            } catch (InterruptedException e) {
-            }
-
-            // TODO: register the new account here.
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(final String json) {
-        }
-    }
+//    private class SubmitContentGrade extends AsyncTask<Void, Integer, String> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//            // TODO: attempt authentication against a network service.
+//            String json = null;
+//            try {
+//
+//                Config.ImageName = "mobile_m_" + Config.ImageName;
+//                Thread.sleep(100);
+//                JSONHelper json_help = new JSONHelper();
+//                String url = Config.Host + Config.Url_content_images + Config.Token + "/" + Config.get_box_id + "/" + Config.ImageName + "/" + ContentValue;
+//                Log.d("Response: ", "> " + url);
+//                json = json_help.makeServiceCall(url, JSONHelper.GET);
+//                Log.d("Response: ", "> " + json);
+//                return json;
+//            } catch (InterruptedException e) {
+//            }
+//
+//            // TODO: register the new account here.
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final String json) {
+//        }
+//    }
 
     public static String _OriginBox;
     public String _ContentValue = null;
@@ -976,31 +985,31 @@ public class ImageViewActivity extends AppCompatActivity  {
     /**
      * Method to show alert dialog
      * */
-    private void showAlert(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message).setTitle("Response from Servers")
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // do nothing
-                        SHOW_HIDE = false;
-//                        partNumberView.setVisibility(View.VISIBLE);
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-
-        if(message == "Upload was successful.") {
-            new SubmitContentGrade().execute();
-        }
-
-        upload_status.setText("");
-        upload_status.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.INVISIBLE);
-        progressBar.setProgress(0);
-        imgPreview.setVisibility(View.GONE);
-//        partNumberView.setTextColor(Color.parseColor("#1F1F1F"));
-    }
+//    private void showAlert(String message) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage(message).setTitle("Response from Servers")
+//                .setCancelable(false)
+//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        // do nothing
+//                        SHOW_HIDE = false;
+////                        partNumberView.setVisibility(View.VISIBLE);
+//                    }
+//                });
+//        AlertDialog alert = builder.create();
+//        alert.show();
+//
+//        if(message == "Upload was successful.") {
+//            new SubmitContentGrade().execute();
+//        }
+//
+//        upload_status.setText("");
+//        upload_status.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setProgress(0);
+//        imgPreview.setVisibility(View.GONE);
+////        partNumberView.setTextColor(Color.parseColor("#1F1F1F"));
+//    }
 
     private void showAlert2(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
