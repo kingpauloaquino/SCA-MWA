@@ -22,7 +22,7 @@ public class MySqlLite {
         db = database;
         created_table("list_of_boxes", "box_uid VARCHAR, worker_id VARCHAR, yard_id VARCHAR, box_id VARCHAR, box_code VARCHAR, box_status INT");
         created_table("list_of_comments", "box_id VARCHAR, worker_id VARCHAR, image_name VARCHAR, comment VARCHAR");
-
+        created_table("list_of_barcode", "worker_id VARCHAR, image_name VARCHAR, barcode VARCHAR");
     }
 
     public void created_table(String name, String fields_with_data_type) {

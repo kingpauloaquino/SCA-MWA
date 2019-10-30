@@ -327,7 +327,7 @@ public class ImageViewActivity extends AppCompatActivity  {
 
             Log.d("Additional-Photo", filePath);
 
-            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name)) {
+            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name, Config.ImageName)) {
                 Intent i = new Intent(getApplicationContext(), AdditionInformationOptionsActivity.class);
                 startActivity(i);
                 finish();

@@ -44,11 +44,12 @@ public class ServerSettingsActivity extends AppCompatActivity {
         String API_URL = Config.transfer_value(this, "API_URL");
         String IMAGES_URL = Config.transfer_value(this, "IMAGES_URL");
 
+
         api_url = (EditText) findViewById(R.id.txtAPIUrl);
         img_url = (EditText) findViewById(R.id.txtImagesUrl);
 
-        api_url.setText(API_URL != "" ? API_URL : "Server API URL Here...");
-        img_url.setText(IMAGES_URL != "" ? IMAGES_URL : "Image URL Here...");
+        api_url.setText(API_URL != "" ? API_URL : "http://staging-api.scrapcatapp.com");
+        img_url.setText(IMAGES_URL != "" ? IMAGES_URL : "http://img.scrapcatapp.com");
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {

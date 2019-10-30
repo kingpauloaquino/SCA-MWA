@@ -53,8 +53,12 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 public class SyncCATPALActivity extends AppCompatActivity {
 
@@ -149,18 +153,27 @@ public class SyncCATPALActivity extends AppCompatActivity {
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                try {
-//                    boolean IsGranted = isStoragePermissionGranted();
-//                    if (IsGranted) {
-//                        do_to();
-//                    } else {
-//                        Toast.makeText(SyncCATPALActivity.this, "No such permission to access storage!", Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (Exception e) {
-//                }
+                try {
+                    boolean IsGranted = isStoragePermissionGranted();
+                    if (IsGranted) {
+                        do_to();
+                    } else {
+                        Toast.makeText(SyncCATPALActivity.this, "No such permission to access storage!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                }
 
-                BackgroundWorker bbb = new BackgroundWorker();
-                bbb.do_process();
+//                Random random = new Random();
+//
+//                String rndm = random.nextInt(99999) + "";
+//
+//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+//                        Locale.getDefault()).format(new Date()) + "_" + rndm;
+//
+//                Log.d("timeStamp", timeStamp);
+//
+//                BackgroundWorker bbb = new BackgroundWorker();
+//                bbb.do_process();
             }
         });
 
@@ -697,42 +710,6 @@ public class SyncCATPALActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                //making POST request.
-                /*try {
-                    HttpResponse response = httpClient.execute(httpPost);
-                    // write response to log
-                    Log.d("Http Post Response:", response.toString());
-                } catch (ClientProtocolException e) {
-                    // Log exception
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // Log exception
-                    e.printStackTrace();
-                }*/
-
-
-                // THIS WAS COMMENT OUT BY RONALD AGUIRRE AT 12/15/2017 CHANGE TO POST METHOD
-                /*String _img_name  = "mobile_m_" +  ImageName;
-                JSONHelper json_help = new JSONHelper();
-                String url = Config.Host + Config.Url_post_comment + Config.Token + "/" + BoxId + "/" + ImageName + "/" + WorkerId +"/" + Comment;
-                Log.d("Response: ", "> " + url);
-                json = json_help.makeServiceCall(url, JSONHelper.GET);
-                Log.d("Response: ", "> " + json);
-
-                JSONObject job = new JSONObject(json);
-                String Status = job.getString("Message");
-                Log.d("Name: ", Status);
-
-                int status = Integer.parseInt(Status);
-                if(status == 202) {
-                    String query = "DELETE FROM list_of_comments WHERE box_id = '"+BoxId+"';";
-                    boolean xStatus = mysql.execute(query);
-                    Log.d("Name: ", "" + xStatus);
-                }
-                else {
-                    Log.d("Name: ", "Error");
-                }
-                return json;*/
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -744,7 +721,79 @@ public class SyncCATPALActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String json) {
             loaderHide();
+
+            new submitBarcode().execute();
+//
+//            String messages = "Synching Process is complete, If all of the Units did not Synch Successfully, Please return to the Dashboard and re-select Synch Unit Photos/Information.";
+//
+//            int resize_screen = 440;
+//            if (ScreenCheckSizeIfUsing10Inches == 1) {
+//                resize_screen = 635;
+//            } else if (ScreenCheckSizeIfUsing10Inches == 2) {
+//                resize_screen = 830;
+//            }
+//
+//            Log.d("SCREEN_XX", resize_screen + "");
+//            showDialogForDynamic(
+//                    SyncCATPALActivity.this,
+//                    "SYNCH UNIT PHOTO AND INFORMATION",
+//                    messages, resize_screen, 174, true);
+            super.onPostExecute(json);
+        }
+    }
+
+
+    private class submitBarcode extends AsyncTask<Void, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            content_ctr = 0;
+
+            Cursor c = mysql.select("SELECT * FROM list_of_barcode;");
+
+            while (c.moveToNext()) {
+                Log.d("WORKER_UID_SQL", "" + c.getString(0));
+                Log.d("PARENT_IMAGE_SQL", "" + c.getString(1));
+                Log.d("SCAN_RESULT_SQL", "" + c.getString(2));
+
+                String ImageName = "mobile_m_" + c.getString(1);
+                Log.d("SCAN_RESULT_SQL", ImageName);
+                do_execute(c.getString(0), ImageName,  c.getString(2));
+
+                Log.d("BARCODE_LOOP", "" + content_ctr);
+                content_ctr++;
+            }
+
+            Log.d("OUTSIDE_LOOP", "" + "x");
+
+            // TODO: register the new account here.
+            return null;
+        }
+
+        private void do_execute(String worker_id, String parent_image, String barcode) {
+            String json = null;
+            try {
+                Thread.sleep(100);
+                JSONHelper json_help = new JSONHelper();
+                String url = Config.Host +  "/barcode-store?value_text="+ barcode + "&image_file_name_parent=" + parent_image + "&worker_id=" +  worker_id;
+                Log.d("Response: ", "> " + url);
+                json = json_help.makeServiceCall(url, JSONHelper.GET);
+                Log.d("Response: ", "> " + json);
+            } catch (InterruptedException e) {
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final String json) {
             String messages = "Synching Process is complete, If all of the Units did not Synch Successfully, Please return to the Dashboard and re-select Synch Unit Photos/Information.";
+
+            AdditionInformationOptionsActivity.drop_barcode_table();
 
             int resize_screen = 440;
             if (ScreenCheckSizeIfUsing10Inches == 1) {
@@ -758,11 +807,12 @@ public class SyncCATPALActivity extends AppCompatActivity {
                     SyncCATPALActivity.this,
                     "SYNCH UNIT PHOTO AND INFORMATION",
                     messages, resize_screen, 174, true);
+
             super.onPostExecute(json);
         }
     }
 
-      private void loaderShow(String Message) {
+    private void loaderShow(String Message) {
         pDialog = new ProgressDialog(SyncCATPALActivity.this);
         pDialog.setMessage(Message);
         pDialog.setCancelable(false);

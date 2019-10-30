@@ -230,10 +230,10 @@ public class Config {
         return true;
     }
 
-    public static boolean save_additiona_image(String source, String destination) {
+    public static boolean save_additiona_image(String source, String destination, String parent_image) {
 
         ServiceWorker s_worker = new ServiceWorker();
-        if(!s_worker.createDirIfNotExists(destination + "/additional-photo")) {
+        if(!s_worker.createDirIfNotExists(destination + "/additional-photo/" + parent_image)) {
             return false;
         }
 

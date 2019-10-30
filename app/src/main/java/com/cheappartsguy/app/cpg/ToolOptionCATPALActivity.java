@@ -72,6 +72,8 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
 
     public static ObjectNames notificationSizes;
 
+    public static boolean isQRCode;
+
     public TelephonyManager telephony_manager;
 
     public Context app_context;
@@ -170,6 +172,8 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
         btnAddUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                isQRCode = true;
                 view_ = view;
                 type_ = "ADDUNIT";
 
@@ -459,12 +463,18 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
 
     // QR Code Command
 
-    public void scanQR(View v, String type, String message) {
+    public void scanQR(View v, String type, boolean isQRCode, String message) {
         try {
             view_ = v;
             message_ = message;
             Intent intent = new Intent(ACTION_SCAN);
-            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+            if(isQRCode) {
+                intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // QR Coding
+            }
+            else {
+                intent.putExtra("SCAN_MODE", "PRODUCT_MODE"); // Barcode Coding
+            }
+
             Log.d("TYPE: ", "> " + type_);
 
             startActivityForResult(intent, 0);
@@ -1387,19 +1397,19 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
                 dialog.dismiss();
 
                 if (number == 151 || number == 184 || number == 101) {
-                    scanQR(v, null, null);
+                    scanQR(v, null, true, null);
                     return;
                 }
 
                 if (number == 141) {
                     type_ = "TRANSFER1";
-                    scanQR(view_, "TRANSFER1", null);
+                    scanQR(view_, "TRANSFER1", true,null);
                     return;
                 }
 
                 if (number == 143) {
                     type_ = "TRANSFER2";
-                    scanQR(view_, "TRANSFER2", null);
+                    scanQR(view_, "TRANSFER2",true, null);
                     return;
                 }
 
@@ -1411,27 +1421,27 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
 
                 if (number == 101) {
                     type_ = "ADDUNIT";
-                    scanQR(view_, "ADDUNIT", null);
+                    scanQR(view_, "ADDUNIT",true, null);
                     return;
                 }
 
                 if (number == 127) {
                     type_ = "ADDUNIT";
-                    scanQR(view_, "ADDUNIT", null);
+                    scanQR(view_, "ADDUNIT", true,null);
                     return;
                 }
 
                 if (number == 131) {
                     type_ = "VIEWBOX";
                     isAddUnitTrue = true;
-                    scanQR(view_, "VIEWBOX", null);
+                    scanQR(view_, "VIEWBOX", true,null);
                     return;
                 }
 
                 if (number == 161) {
                     type_ = "VIEWUNIT";
                     isAddUnitTrue = true;
-                    scanQR(view_, "VIEWUNIT", null);
+                    scanQR(view_, "VIEWUNIT",true, null);
                     return;
                 }
 
@@ -2136,7 +2146,7 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         // do nothing
                         type_ = "TRANSFER1";
-                        scanQR(view_, "TRANSFER1", null);
+                        scanQR(view_, "TRANSFER1", true, null);
                     }
                 });
         AlertDialog alert = builder.create();
@@ -2151,7 +2161,7 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         // do nothing
                         FROM_BOX = Config.get_box_id;
-                        scanQR(view_, "TRANSFER2", null);
+                        scanQR(view_, "TRANSFER2", true,null);
                     }
                 });
         AlertDialog alert = builder.create();

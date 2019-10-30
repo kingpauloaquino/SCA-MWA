@@ -120,6 +120,9 @@ public class BackgroundWorker {
         try {
             ServiceWorker sw = new ServiceWorker();
             File[] dirFiles = sw.readDirList( null );
+
+            Log.d("Test22: ", dirFiles + "");
+
             root_loop_length = dirFiles.length;
 
             Log.d("Test22: ", root_loop_length + "");
