@@ -139,12 +139,27 @@ public class BackgroundWorker {
                     if (sub_1.length != 0) {
                         for (int s = 0; s < sub_1.length; s++) {
 
-                            String fname2 = fname1 + "/" + sub_1[s].getName();
-                            if(!fname2.contains("temp")) {
-                                Log.d("Filename2: ", fname2);
-                                do_image_scan(sw, fname2);
+                            if(!sub_1[s].getName().contains("additional-photo")) {
+
+                                String fname2 = fname1 + "/" + sub_1[s].getName();
+
+                                Log.d("Filename2-A: ", fname2);
+
+                                if(!fname2.contains("temp")) {
+                                    do_image_scan(sw, fname2);
+                                }
+                            }
+                            else {
+                                String fname2 = fname1 + "/" + sub_1[s].getName();
+
+                                Log.d("Filename2-B: ", fname2);
+
+                                if(!fname2.contains("temp")) {
+                                    do_additional_photo_scan(sw, fname2);
+                                }
                             }
 
+                            Log.d("FileLoop: ", s + "");
                         }
                     }
                     counter_loop = i;
@@ -179,6 +194,67 @@ public class BackgroundWorker {
         catch (Exception ex) { }
     }
 
+    public void do_additional_photo_scan( ServiceWorker sw, String fn) {
+        try {
+            int ctr = 1;
+            File[] files = sw.readDirList( fn );
+            if (files.length != 0) {
+                for (int s = 0; s < files.length; s++) {
+
+                    String parent_name = files[s].getName();
+
+                    String fname3 =  fn + "/" + parent_name;
+
+                    String real_path = sw.get_root(true) + "/" + fname3;
+
+                    Log.d("AFilename30: ", parent_name);
+
+                    Log.d("AFilename31: ", fname3);
+
+                    Log.d("AFilename32: ", real_path);
+
+                    String reference = fn.replace("/", "").replace("additional-photo", "_") + parent_name;
+
+                    Log.d("AFilename33: ", reference);
+
+                    do_additional_photos(sw, fname3, real_path, parent_name, reference);
+
+                }
+            }
+        }
+        catch (Exception ex) { }
+    }
+
+    public void do_additional_photos( ServiceWorker sw, String fn, String parent_path, String parent_name, String reference) {
+        try {
+            int ctr = 1;
+            File[] files = sw.readDirList( fn );
+            if (files.length != 0) {
+                for (int s = 0; s < files.length; s++) {
+                    String filename = files[s].getName();
+
+                    Log.d("ImgAdditional: " + ctr, filename);
+
+                    String real_path = parent_path + "/" + filename;
+
+                    Log.d("real_path: ", real_path);
+
+                    Log.d("reference: ", reference);
+
+                    File file = new File(real_path);
+                    if (file.isFile()) {
+                        do_array_process2(real_path, parent_name, reference, filename);
+                        Log.d("IsFilename: ", ctr + "");
+                        ctr++;
+                    }
+
+                    ctr++;
+                }
+            }
+        }
+        catch (Exception ex) { }
+    }
+
     public void do_array_process(String image_file) {
 
         this.IMAGE_FULL_PATH = image_file;
@@ -186,6 +262,9 @@ public class BackgroundWorker {
 
         String[] splits = this.IMAGE_FULL_PATH.split("/");
         this.CATPAL_NUMBER = splits[6] + '_' + splits[7];
+
+        Log.d("Filename4: ", this.CATPAL_NUMBER);
+
         this.UPLOAD_URL = Config.Images_Host + "/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=CATPAL";
 
         Log.d("IMAGE TO BE UPLOADED: ", this.IMAGE_FULL_PATH);
@@ -196,6 +275,31 @@ public class BackgroundWorker {
         objContent.ImageName = splits[8];
         objContent.ImagePath = this.IMAGE_FULL_PATH;
         objContent.GradeValue = splits[7];
+        objContent.UrlOfServer = this.UPLOAD_URL;
+        SyncCATPALActivity.Images_Data.add(objContent);
+    }
+
+    public void do_array_process2(String image_file, String parent_name, String reference, String filename) {
+
+        this.IMAGE_FULL_PATH = image_file;
+        Log.d("Filename4: ", this.IMAGE_FULL_PATH);
+
+        String[] splits = reference.split("_");
+
+        this.CATPAL_NUMBER = splits[0] + "-" + splits[1];
+
+        Log.d("Filename4: ",  this.CATPAL_NUMBER);
+
+        this.UPLOAD_URL = "http://img-v2.scrapcatapp.com/index.php?category=additional-photo&reference="+  this.CATPAL_NUMBER + "&parent=" + parent_name;
+
+        Log.d("IMAGE TO BE UPLOADED: ", this.IMAGE_FULL_PATH);
+        Log.d("SERVER URL: ", this.UPLOAD_URL);
+
+        GradeContentObject objContent = new GradeContentObject();
+        objContent.BoxId = this.CATPAL_NUMBER;
+        objContent.ImageName = filename;
+        objContent.ImagePath = this.IMAGE_FULL_PATH;
+        objContent.GradeValue = "";
         objContent.UrlOfServer = this.UPLOAD_URL;
         SyncCATPALActivity.Images_Data.add(objContent);
     }

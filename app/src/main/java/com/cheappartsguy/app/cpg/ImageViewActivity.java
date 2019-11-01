@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -106,6 +107,8 @@ public class ImageViewActivity extends AppCompatActivity  {
 //    public static String ImageName = null;
     public static String ContentValue = null;
     public static boolean AdditionalPhotoDir = false;
+    public static String ParentImages;
+
 
     public int ScreenCheckSizeIfUsing10Inches;
     public static ObjectNames notificationSizes;
@@ -327,7 +330,7 @@ public class ImageViewActivity extends AppCompatActivity  {
 
             Log.d("Additional-Photo", filePath);
 
-            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name, Config.ImageName)) {
+            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name, ParentImages.replace(".", "-") )) {
                 Intent i = new Intent(getApplicationContext(), AdditionInformationOptionsActivity.class);
                 startActivity(i);
                 finish();
@@ -373,9 +376,12 @@ public class ImageViewActivity extends AppCompatActivity  {
             }
         }
 
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
+        Random random = new Random();
+
+        String rndm = random.nextInt(99999) + "";
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss",
+                Locale.getDefault()).format(new Date()) + "-" + rndm;
 
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
@@ -383,6 +389,11 @@ public class ImageViewActivity extends AppCompatActivity  {
             Config.latest_image = Config.Device_UID + timeStamp + ".jpg";
             Config.ImageFile = mediaStorageDir.getPath() + File.separator + Config.ImageName;
             mediaFile = new File(Config.ImageFile);
+
+            if(!AdditionalPhotoDir) {
+                ParentImages = Config.ImageName;
+            }
+
         }else {
             return null;
         }
