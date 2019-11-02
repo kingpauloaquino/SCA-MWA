@@ -449,7 +449,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 for (GradeContentObject d : Images_Data) {
 
                     Log.d("Image Name " + content_ctr, d.ImageName);
-                    Log.d("Image Name " + content_ctr, d.ImagePath);
+                    Log.d("Image Path " + content_ctr, d.ImagePath);
                     Log.d("Image Url " + content_ctr, d.UrlOfServer);
 
                     code = uploadFile(d);
@@ -793,7 +793,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
         protected void onPostExecute(final String json) {
             String messages = "Synching Process is complete, If all of the Units did not Synch Successfully, Please return to the Dashboard and re-select Synch Unit Photos/Information.";
 
-            AdditionInformationOptionsActivity.drop_barcode_table();
+//            AdditionInformationOptionsActivity.drop_barcode_table();
 
             int resize_screen = 440;
             if (ScreenCheckSizeIfUsing10Inches == 1) {

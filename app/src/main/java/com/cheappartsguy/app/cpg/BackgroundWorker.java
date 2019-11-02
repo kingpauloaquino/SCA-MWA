@@ -267,6 +267,8 @@ public class BackgroundWorker {
 
         this.UPLOAD_URL = Config.Images_Host + "/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=CATPAL";
 
+//        this.UPLOAD_URL = "http://192.168.21.251:8233/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=CATPAL";
+
         Log.d("IMAGE TO BE UPLOADED: ", this.IMAGE_FULL_PATH);
         Log.d("SERVER URL: ", this.UPLOAD_URL);
 
@@ -286,11 +288,13 @@ public class BackgroundWorker {
 
         String[] splits = reference.split("_");
 
-        this.CATPAL_NUMBER = splits[0] + "-" + splits[1];
+        this.CATPAL_NUMBER = splits[0] + "_" + splits[1];
 
         Log.d("Filename4: ",  this.CATPAL_NUMBER);
 
-        this.UPLOAD_URL = "http://img-v2.scrapcatapp.com/index.php?category=additional-photo&reference="+  this.CATPAL_NUMBER + "&parent=" + parent_name;
+        this.UPLOAD_URL = Config.Images_Host + "/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=ADDITIONAL&parent=" + parent_name;
+
+//        this.UPLOAD_URL = "http://192.168.21.251:8233/upload_process.php?ref=mobile_m&uid=mobile_m&part="+this.CATPAL_NUMBER+"&edited=ADDITIONAL&parent=" + parent_name;
 
         Log.d("IMAGE TO BE UPLOADED: ", this.IMAGE_FULL_PATH);
         Log.d("SERVER URL: ", this.UPLOAD_URL);
@@ -299,7 +303,7 @@ public class BackgroundWorker {
         objContent.BoxId = this.CATPAL_NUMBER;
         objContent.ImageName = filename;
         objContent.ImagePath = this.IMAGE_FULL_PATH;
-        objContent.GradeValue = "";
+        objContent.GradeValue = "0";
         objContent.UrlOfServer = this.UPLOAD_URL;
         SyncCATPALActivity.Images_Data.add(objContent);
     }
