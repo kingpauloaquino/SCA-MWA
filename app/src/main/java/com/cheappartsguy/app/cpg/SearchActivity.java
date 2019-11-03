@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         sqlDB = openOrCreateDatabase(MySqlLite.DB_NAME, Context.MODE_PRIVATE, null);
 
         mysql = new MySqlLite(sqlDB);
-        mysql.execute("DELETE FROM list_of_boxes;");
+//        mysql.execute("DELETE FROM list_of_boxes;");
 
 
         BackgroundService.RESET_DB = true;

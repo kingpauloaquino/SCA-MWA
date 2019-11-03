@@ -390,10 +390,6 @@ public class ImageViewActivity extends AppCompatActivity  {
             Config.ImageFile = mediaStorageDir.getPath() + File.separator + Config.ImageName;
             mediaFile = new File(Config.ImageFile);
 
-            if(!AdditionalPhotoDir) {
-                ParentImages = Config.ImageName;
-            }
-
         }else {
             return null;
         }

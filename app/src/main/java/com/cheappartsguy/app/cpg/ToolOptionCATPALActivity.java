@@ -86,7 +86,7 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
     public SQLiteDatabase CreatedDB() {
         sqlDB = openOrCreateDatabase(MySqlLite.DB_NAME, Context.MODE_PRIVATE, null);
         mysql = new MySqlLite(sqlDB);
-        mysql.execute("DROP TABLE IF EXISTS list_of_boxes;");
+        mysql.execute("DROP TABLE IF EXISTS list_of_boxes;", true);
         return sqlDB;
     }
 
@@ -127,6 +127,8 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
         if (!isServiceRunning) {
             InitService();
         }
+
+        ImageViewActivity.AdditionalPhotoDir = false;
 
         app_context = getApplicationContext();
         ScreenCheckSizeIfUsing10Inches = Config.getScreenOfTablet(getApplicationContext());
@@ -172,6 +174,8 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
         btnAddUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                BackgroundService.stopBackgroundWorker = true;
 
                 isQRCode = true;
                 view_ = view;
@@ -557,32 +561,32 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
                     sizes.tab10Sizes = new int[]{650, 600, 650, 600};
                     sizes.tabS2Sizes = new int[]{860, 600, 860, 600};
 
-                    if (box_status == 0) {
-                        moduleRequest = true;
-                        String pass = result_QR_BOX_ID;
-                        mTask = new checkQrCode(pass);
-                        mTask.execute();
-
-                        if (unit_check_user == true) {
-                            unit_check_user = false;
-                            return;
-                        } else {
-                            if (mTask.getStatus() != AsyncTask.Status.RUNNING) {
-                                notificationSizes = Config.getDialogSizes(ScreenCheckSizeIfUsing10Inches, app_context, sizes, true);
-
-                                //message_ = "This Box#: <font color='#b62727'><b>\" + QR_BOX_SHOW_ID + \"</b></font> not appears as a Box in your Account";
-                                message_ = "This Box#: <font color='#b62727'><b>" + QR_BOX_SHOW_ID + "</b></font> not appears as a Box in your Account. <br /> Press <b>REFRESH</b> to update the Box#s on your Mobile App, or press <b>CANCEL</b> to scan a different Box.";
-                                //message_ = "Oops, Please wait 1 minute to completely load your boxes list.<br />";
-
-                                showDialogForDynamicError(
-                                        ToolOptionCATPALActivity.this,
-                                        "BOX NOT IN YOUR ACCOUNT",
-                                        message_, notificationSizes.Width, notificationSizes.Height, 153, 0);
-
-                                return;
-                            }
-                        }
-                    }
+//                    if (box_status == 0) {
+//                        moduleRequest = true;
+//                        String pass = result_QR_BOX_ID;
+//                        mTask = new checkQrCode(pass);
+//                        mTask.execute();
+//
+//                        if (unit_check_user == true) {
+//                            unit_check_user = false;
+//                            return;
+//                        } else {
+//                            if (mTask.getStatus() != AsyncTask.Status.RUNNING) {
+//                                notificationSizes = Config.getDialogSizes(ScreenCheckSizeIfUsing10Inches, app_context, sizes, true);
+//
+//                                //message_ = "This Box#: <font color='#b62727'><b>\" + QR_BOX_SHOW_ID + \"</b></font> not appears as a Box in your Account";
+//                                message_ = "This Box#: <font color='#b62727'><b>" + QR_BOX_SHOW_ID + "</b></font> not appears as a Box in your Account. <br /> Press <b>REFRESH</b> to update the Box#s on your Mobile App, or press <b>CANCEL</b> to scan a different Box.";
+//                                //message_ = "Oops, Please wait 1 minute to completely load your boxes list.<br />";
+//
+//                                showDialogForDynamicError(
+//                                        ToolOptionCATPALActivity.this,
+//                                        "BOX NOT IN YOUR ACCOUNT",
+//                                        message_, notificationSizes.Width, notificationSizes.Height, 153, 0);
+//
+//                                return;
+//                            }
+//                        }
+//                    }
 
                     if (box_status == 3) {
                         notificationSizes = Config.getDialogSizes(ScreenCheckSizeIfUsing10Inches, app_context, sizes, true);
@@ -833,15 +837,19 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
                     sizes.tabS2Sizes = new int[]{860, 600, 860, 800};
 
                     if (box_status == 0) {
-                        moduleRequest =false;
+                        moduleRequest = false;
                         String pass = result_QR_BOX_ID;
+
                         mTask = new checkQrCode(pass);
                         mTask.execute();
 
-                        if (unit_check_user == true) {
+                        if (unit_check_user == true)
+                        {
                             unit_check_user = false;
                             return;
-                        } else {
+                        }
+                        else
+                        {
                             if (mTask.getStatus() != AsyncTask.Status.RUNNING) {
                                 notificationSizes = Config.getDialogSizes(ScreenCheckSizeIfUsing10Inches, app_context, sizes, true);
 

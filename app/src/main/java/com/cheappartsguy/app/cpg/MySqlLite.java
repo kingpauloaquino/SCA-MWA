@@ -42,7 +42,7 @@ public class MySqlLite {
         return false;
     }
 
-    public boolean execute(String query) {
+    public boolean execute(String query, boolean IsDrop) {
         try {
             db.execSQL(query);
             Log.d(TAG, "DONE");

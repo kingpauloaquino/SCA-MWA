@@ -12,3 +12,5 @@ public class GradeContentObject  {
     public String GradeValue;
     public String UrlOfServer;
 }
+
+

@@ -24,6 +24,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -88,6 +89,8 @@ public class SyncCATPALActivity extends AppCompatActivity {
     public static List<GradeContentObject> Images_Content;
     public static List<GradeContentObject> Images_Data;
 
+    public static List<AdditionalContentObject> Additional_Data;
+
     public static GradeContentObject ToBeUploadData;
 
     public SQLiteDatabase sqlDB;
@@ -126,11 +129,13 @@ public class SyncCATPALActivity extends AppCompatActivity {
         titleTxtView.setText(Config.getAppName("SYNCH PROCESS"));
         txtAccount.setText(Config.Worker_name);
 
-        BackgroundService.isStop = true;
+        BackgroundService.stopBackgroundWorker = true;
         Log.d("IsStop", BackgroundService.isStop + "");
 
         Images_Content = new ArrayList<GradeContentObject>();
         Images_Data = new ArrayList<GradeContentObject>();
+        Additional_Data = new ArrayList<AdditionalContentObject>();
+
         txtIndividualProgress = (TextView) findViewById(R.id.txtIndividualProgress);
         txtCompletedA = (TextView) findViewById(R.id.txtCompletedA);
         txtCompletedB = (TextView) findViewById(R.id.txtCompletedB);
@@ -153,6 +158,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BackgroundService.stopBackgroundWorker = true;
                 try {
                     boolean IsGranted = isStoragePermissionGranted();
                     if (IsGranted) {
@@ -162,18 +168,6 @@ public class SyncCATPALActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                 }
-
-//                Random random = new Random();
-//
-//                String rndm = random.nextInt(99999) + "";
-//
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-//                        Locale.getDefault()).format(new Date()) + "_" + rndm;
-//
-//                Log.d("timeStamp", timeStamp);
-//
-//                BackgroundWorker bbb = new BackgroundWorker();
-//                bbb.do_process();
             }
         });
 
@@ -504,13 +498,27 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == 200) {
                     // Server response
-                    responseString = "Upload was successful."; //EntityUtils.toString(r_entity);
-                    GradeContentObject objContent = new GradeContentObject();
-                    objContent.BoxId = data.BoxId;
-                    objContent.ImageName = data.ImageName;
-                    objContent.ImagePath = data.ImagePath;
-                    objContent.GradeValue = data.GradeValue;
-                    Images_Content.add(objContent);
+
+                    if(data.GradeValue.contains("ADDITIONAL")) {
+                        responseString = "Additional Photo Uploaded Successful";
+                        String[] values = data.GradeValue.split(":");
+                        AdditionalContentObject additional = new AdditionalContentObject();
+                        additional.WorkerId = "0";
+                        additional.YardId_BoxId = data.BoxId;
+                        additional.ParentImageName = values[1];
+                        additional.ChildImageName = data.ImageName;
+                        Additional_Data.add(additional);
+                    }
+                    else {
+                        responseString = "Unit Photo Uploaded Successful";
+                        GradeContentObject objContent = new GradeContentObject();
+                        objContent.BoxId = data.BoxId;
+                        objContent.ImageName = data.ImageName;
+                        objContent.ImagePath = data.ImagePath;
+                        objContent.GradeValue = data.GradeValue;
+                        Images_Content.add(objContent);
+                    }
+
                 } else {
                     responseString = "Error occurred! Http Status Code: " + statusCode;
                 }
@@ -631,7 +639,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
     // process comment
 
-    private class submitComment extends AsyncTask<Void, Integer, String> {
+    private class submitComment3 extends AsyncTask<Void, Integer, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -650,7 +658,11 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
                 if (c.getString(3).length() > 0) {
                     String ImageName = "mobile_m_" + c.getString(2);
-                    do_execute(c.getString(0), c.getString(1), ImageName, c.getString(3));
+                    String Comments = c.getString(3);
+
+                    Log.d("ImageName", ImageName);
+
+                    do_execute(c.getString(0), c.getString(1), ImageName, Comments);
                 }
 
                 Log.d("INSIDE_LOOP", "" + content_ctr);
@@ -668,14 +680,19 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 HttpClient httpClient = new DefaultHttpClient();
                 // replace with your url + Config.Token
                 //String url = Config.Host + Config.Url_post_comment + Config.Token + "/" + BoxId + "/" + ImageName + "/" + WorkerId +"/" + Comment;
-                HttpPost httpPost = new HttpPost(Config.Host + "/api/v2/cats_comments_mobile");
+
+                String url = Config.Host + "/api/v2/cats_comments_mobile";
+
+                Log.d("URL", url);
+
+                HttpPost httpPost = new HttpPost(url);
 
                 //Log.d("Http Post COMMENTS:", Config.Host + "/api/v2/cats_comments_mobile/");
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
                 Log.d("Http Post COMMENTS:", Comment);
                 nameValuePair.add(new BasicNameValuePair("cats_images_name", ImageName));
                 nameValuePair.add(new BasicNameValuePair("user_id", WorkerId));
-                nameValuePair.add(new BasicNameValuePair("comments", Comment));
+                nameValuePair.add(new BasicNameValuePair("comments", Comment.replace(".jpg", "-jpg")));
                 //Encoding POST data
                 try {
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
@@ -699,7 +716,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
                     if (status == 202) {
                         String query = "DELETE FROM list_of_comments WHERE box_id = '" + BoxId + "';";
-                        boolean xStatus = mysql.execute(query);
+                        boolean xStatus = mysql.execute(query, true);
                         Log.d("Name: ", "" + xStatus);
                     } else {
                         Log.d("Name: ", "Error");
@@ -720,24 +737,70 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String json) {
-            loaderHide();
-
             new submitBarcode().execute();
-//
-//            String messages = "Synching Process is complete, If all of the Units did not Synch Successfully, Please return to the Dashboard and re-select Synch Unit Photos/Information.";
-//
-//            int resize_screen = 440;
-//            if (ScreenCheckSizeIfUsing10Inches == 1) {
-//                resize_screen = 635;
-//            } else if (ScreenCheckSizeIfUsing10Inches == 2) {
-//                resize_screen = 830;
-//            }
-//
-//            Log.d("SCREEN_XX", resize_screen + "");
-//            showDialogForDynamic(
-//                    SyncCATPALActivity.this,
-//                    "SYNCH UNIT PHOTO AND INFORMATION",
-//                    messages, resize_screen, 174, true);
+            super.onPostExecute(json);
+        }
+    }
+
+    private class submitComment extends AsyncTask<Void, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String result = null;
+            content_ctr = 0;
+            Cursor c = mysql.select("SELECT * FROM list_of_comments;");
+            while (c.moveToNext()) {
+                Log.d("box_id", "" + c.getString(0));
+                Log.d("worker_id", "" + c.getString(1));
+                Log.d("image_name", "" + c.getString(2));
+                Log.d("comment", "" + c.getString(3));
+
+                if (c.getString(3).length() > 0) {
+                    String ImageName = "mobile_m_" + c.getString(2);
+                    String Comments = TextUtils.htmlEncode(c.getString(3).replace(" ", "%20"));
+
+                    Log.d("Comments", Comments);
+
+                    do_execute(c.getString(0), c.getString(1), ImageName, Comments);
+                }
+
+                Log.d("INSIDE_LOOP", "" + content_ctr);
+            }
+            Log.d("OUTSIDE_LOOP", "" + "x");
+            result = null;
+            return result;
+        }
+
+        private void do_execute(String BoxId, String WorkerId, String ImageName, String Comment) {
+            String json = null;
+            try {
+                Thread.sleep(100);
+                JSONHelper json_help = new JSONHelper();
+                String url = Config.Host +  "/api/v2/cats_comments_mobile?cats_images_name="+ ImageName +"&user_id="+ WorkerId +"&comments=" +  Comment;
+                Log.d("Response: ", "> " + url);
+                json = json_help.makeServiceCall(url, JSONHelper.GET);
+                Log.d("Response: ", "> " + json);
+
+                int status = Integer.parseInt(json);
+                if (status == 202) {
+                    String query = "DELETE FROM list_of_comments WHERE box_id = '" + BoxId + "';";
+                    boolean xStatus = mysql.execute(query, true);
+                    Log.d("Comment Deleted: ", "" + xStatus);
+                } else {
+                    Log.d("Comment Deleted: ", "Error");
+                }
+            } catch (InterruptedException e) {
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final String json) {
+            new submitBarcode().execute();
+
             super.onPostExecute(json);
         }
     }
@@ -763,7 +826,9 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 Log.d("SCAN_RESULT_SQL", "" + c.getString(2));
 
                 String ImageName = "mobile_m_" + c.getString(1);
+
                 Log.d("SCAN_RESULT_SQL", ImageName);
+
                 do_execute(c.getString(0), ImageName,  c.getString(2));
 
                 Log.d("BARCODE_LOOP", "" + content_ctr);
@@ -791,9 +856,59 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final String json) {
+            new submitAdditionalPhoto().execute();
+
+            super.onPostExecute(json);
+        }
+    }
+
+    private class submitAdditionalPhoto extends AsyncTask<Void, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            for (AdditionalContentObject additional : Additional_Data) {
+                Log.d("YardId_BoxId: ", additional.YardId_BoxId);
+                Log.d("ParentImageName: ", additional.ParentImageName);
+                Log.d("ChildImageName: ", additional.ChildImageName);
+
+                String parentImageDotJpg = additional.ParentImageName.replace("-jpg", ".jpg");
+
+                do_execute(additional.YardId_BoxId.replace("_", "-"), parentImageDotJpg, "mobile_m_" + additional.ChildImageName);
+            }
+
+            // TODO: register the new account here.
+            return null;
+        }
+
+        private void do_execute(String reference, String parent, String child) {
+            String json = null;
+            try {
+                Thread.sleep(100);
+                JSONHelper json_help = new JSONHelper();
+                String url = Config.Host +  "/api/v2/additional_photos?worker_uid=0&yard_and_box=" + reference + "&img_name_parent=" +  parent + "&image_file_name=" + child;
+                Log.d("Response: ", "> " + url);
+                json = json_help.makeServiceCall(url, JSONHelper.GET);
+                Log.d("Response: ", "> " + json);
+            } catch (InterruptedException e) {
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final String json) {
+
+            BackgroundService.stopBackgroundWorker = false;
+
+            loaderHide();
+
             String messages = "Synching Process is complete, If all of the Units did not Synch Successfully, Please return to the Dashboard and re-select Synch Unit Photos/Information.";
 
-//            AdditionInformationOptionsActivity.drop_barcode_table();
+            AdditionInformationOptionsActivity.drop_barcode_table();
 
             int resize_screen = 440;
             if (ScreenCheckSizeIfUsing10Inches == 1) {
@@ -811,6 +926,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
             super.onPostExecute(json);
         }
     }
+
 
     private void loaderShow(String Message) {
         pDialog = new ProgressDialog(SyncCATPALActivity.this);

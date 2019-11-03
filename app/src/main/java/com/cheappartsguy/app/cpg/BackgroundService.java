@@ -2,6 +2,7 @@ package com.cheappartsguy.app.cpg;
 
 
 import android.app.IntentService;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,12 +29,14 @@ import java.net.URL;
 
 public class BackgroundService extends IntentService {
 
+    private ProgressDialog pDialog;
     public static SQLiteDatabase sqlDB;
     public MySqlLite mysql;
     public static boolean RESET_DB;
     private static final String TAG = "HelloService";
     public static boolean isRunning;
     public static boolean isStop;
+    public static boolean stopBackgroundWorker;
     public static int counter  = 0;
     public static int laps  = 1;
     public String API_URL;
@@ -49,7 +52,6 @@ public class BackgroundService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Log.d(TAG, "Service Started!");
         try {
-//            customHandler.postDelayed(updateTimerThread, 0);
             if(!isStop) {
                 do_async();
             }
@@ -164,39 +166,6 @@ public class BackgroundService extends IntentService {
 
                 return;
 
-//                int box_length = Integer.parseInt(box_counts);
-//                if(box_length > 0) {
-//                    sqlDB = openOrCreateDatabase(MySqlLite.DB_NAME, Context.MODE_PRIVATE, null);
-//                    mysql = new MySqlLite(sqlDB);
-//                    for(int i = 0; i < box_length; i++) {
-//                        String box_uid = job.getString("Id_" + i);
-//                        String worker_id = job.getString("worker_of_" + i);
-//                        String yard_id = job.getString("yard_id_" + i);
-//                        String box_id = job.getString("box_id_" + i);
-//                        String box_code = job.getString("box_code_" + i);
-//                        String box_status = job.getString("box_status_" + i);
-//
-//                        try {
-//                            if(Integer.parseInt(box_status) == 0) {
-//                                box_status = "5";
-//                            }
-//                        }
-//                        catch(Exception e)
-//                        {
-//                            box_status = "5";
-//                        }
-//
-//                        Log.d("Results: box_uid", "> " + box_uid );
-//                        Log.d("Results: worker_id", "> " + worker_id );
-//                        Log.d("Results: yard_id", "> " + yard_id );
-//                        Log.d("Results: box_id", "> " + box_id );
-//                        Log.d("Results: box_code", "> " + box_code );
-//                        Log.d("Results: box_status", "> " + box_status );
-//
-//                        mysql.insert("list_of_boxes", "'" + box_uid + "', '" + worker_id + "', '" + yard_id + "', '" + box_id + "', '" + box_code + "', '" + box_status + "'");
-//                    }
-//                }
-
             }catch(Exception e)
             {
                 e.printStackTrace();
@@ -206,7 +175,17 @@ public class BackgroundService extends IntentService {
         isRunning = false;
         laps = 60 * 120;
         counter = 0;
-//        customHandler.postDelayed(updateTimerThread, 0);
+    }
+
+    private void loaderShow(String Message) {
+        pDialog = new ProgressDialog(BackgroundService.this);
+        pDialog.setMessage(Message);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    private void loaderHide() {
+        pDialog.dismiss();
     }
 
 }

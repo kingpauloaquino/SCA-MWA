@@ -35,6 +35,8 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
     public SQLiteDatabase sqlDB;
     public static MySqlLite mysql;
 
+    public static String LatestParentImageName;
+
     public SQLiteDatabase CreatedDB() {
         sqlDB = openOrCreateDatabase(MySqlLite.DB_NAME, Context.MODE_PRIVATE, null);
         mysql = new MySqlLite(sqlDB);
@@ -83,7 +85,6 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnBarCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 scanQR(view, "");
             }
         });
@@ -96,7 +97,6 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);
                 startActivity(i);
                 finish();
-
             }
         });
 
@@ -127,7 +127,7 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
     public void scanQR(View v, String message) {
         try {
             Intent intent = new Intent(ACTION_SCAN);
-            intent.putExtra("SCAN_MODE", "PRODUCT_MODE"); // Barcode Coding
+            intent.putExtra("SCAN_MODE", "MODE"); // Barcode Coding
 
             startActivityForResult(intent, 0);
         } catch (ActivityNotFoundException anfe) {
@@ -184,7 +184,12 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
     }
 
     public static void drop_barcode_table() {
-        mysql.execute("DROP TABLE IF EXISTS list_of_barcode;");
+
+        Cursor c = mysql.select("SELECT * FROM list_of_barcode;");
+
+        if(c.getCount() > 0) {
+            mysql.execute("DROP TABLE IF EXISTS list_of_barcode;", true);
+        }
     }
 
 }
