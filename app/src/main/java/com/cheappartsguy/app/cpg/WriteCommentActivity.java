@@ -137,6 +137,14 @@ public class WriteCommentActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             loaderShow("Please wait...");
+
+            try {
+                Log.d("String Encode", StringEncoder.Encode(txtComments.getText().toString()));
+                EncodeComments = (txtComments.getText().toString()).replace("\n","<br>").replace(" ", "%20");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
         }
 
         @Override
@@ -144,78 +152,16 @@ public class WriteCommentActivity extends AppCompatActivity {
             // TODO: attempt authentication against a network service.
             String json = null;
 
-            try {
-                Log.d("String Encode", StringEncoder.Encode(txtComments.getText().toString()));
-                EncodeComments = (txtComments.getText().toString()).replace("\n","<br>");
-                //EncodeComments = StringEncoder.Encode(txtComments.getText().toString());
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            URL = URL + "?user_id=" + Config.Worker_uid.toString() + "&box_uid=" + Config.get_box_id + "&box_comments=" + EncodeComments;
 
-            // RONALD CHANGE POSTING OF COMMENTS TO POST METHOD TO ACCOMODATE LONG COMMENTS AND SPECIAL CHARACTER
-            /*try {
+            try {
+
                 Thread.sleep(100);
                 JSONHelper json_help = new JSONHelper();
                 json = json_help.makeServiceCall(URL, JSONHelper.GET);
                 Log.d("Response: ", "> " + URL);
                 Log.d("Response: ", "> " + json);
-                return json;
-            } catch (InterruptedException e) {
-            }*/
-            try {
-                HttpClient httpClient = new DefaultHttpClient();
-                // replace with your url + Config.Token
-                HttpPost httpPost = new HttpPost(URL);
-
-                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-                //Log.d("Http Post COMMENTS:", Comment);
-                nameValuePair.add(new BasicNameValuePair("user_id", Config.Worker_uid.toString()));
-                nameValuePair.add(new BasicNameValuePair("box_uid", Config.get_box_id));
-                nameValuePair.add(new BasicNameValuePair("box_comments", EncodeComments));
-                //Encoding POST data
-                try {
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-                } catch (UnsupportedEncodingException e) {
-                    // log exception
-                    e.printStackTrace();
-                }
-
-                //POST data
-                try {
-
-                    Log.d("Http Post Inside:", "HTTP POSTING");
-                    HttpResponse response = httpClient.execute(httpPost);
-                    String server_response = EntityUtils.toString(response.getEntity());
-
-                    Log.i("Server response", server_response);
-
-                    String status = server_response;
-                    json = status;
-                    Log.d("Http Post after:", server_response);
-
-                } catch (UnsupportedEncodingException e) {
-                    // log exception
-                    e.printStackTrace();
-                }
-
-                //making POST request.
-                /*try {
-                    HttpResponse response = httpClient.execute(httpPost);
-                    // write response to log
-                    Log.d("Http Post Response:", response.toString());
-                } catch (ClientProtocolException e) {
-                    // Log exception
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // Log exception
-                    e.printStackTrace();
-                }*/
-
-                // COMMENT OUT BY RONALD AGUIRRE 12/15/2017
-                /*JSONHelper json_help = new JSONHelper();
-                json = json_help.makeServiceCall(URL, JSONHelper.GET);
-                Log.d("Response: ", "> " + URL);
-                Log.d("Response: ", "> " + json);*/
+                Log.i("Server response", json);
 
                 return json;
                 //InterruptedException
