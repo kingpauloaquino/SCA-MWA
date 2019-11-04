@@ -31,6 +31,7 @@ public class Config {
     private static Activity _activity;
 
     public static String Device_UID;
+    public static int totalAdditionalPhoto;
 
     public static List<ObjectNames> ObjectNamesList;
 

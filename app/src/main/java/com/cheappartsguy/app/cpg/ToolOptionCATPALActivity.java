@@ -128,6 +128,7 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
             InitService();
         }
 
+        Config.totalAdditionalPhoto = 0;
         ImageViewActivity.AdditionalPhotoDir = false;
 
         app_context = getApplicationContext();
