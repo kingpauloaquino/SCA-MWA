@@ -65,9 +65,10 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
     public static SharedPreferences sharedPref;
     public static SharedPreferences.Editor editor;
+    private static int sync_counting = 0;
     private ProgressDialog pDialog;
 
-    public static TextView txtIndividualProgress, txtCompletedA, txtCompletedB, txtScreenId;
+    public static TextView txtIndividualProgress, txtCompletedA, txtCompletedB, txtScreenId, txtStatus;
     public static long totalSize;
 
     public static ProgressBar progressBar, progressBarCompleted;
@@ -137,6 +138,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
         Additional_Data = new ArrayList<AdditionalContentObject>();
 
         txtIndividualProgress = (TextView) findViewById(R.id.txtIndividualProgress);
+        txtStatus = (TextView) findViewById(R.id.txtStatus);
         txtCompletedA = (TextView) findViewById(R.id.txtCompletedA);
         txtCompletedB = (TextView) findViewById(R.id.txtCompletedB);
         txtScreenId = (TextView) findViewById(R.id.txtScreenId);
@@ -159,6 +161,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 BackgroundService.stopBackgroundWorker = true;
+                sync_counting = 0;
                 try {
                     boolean IsGranted = isStoragePermissionGranted();
                     if (IsGranted) {
@@ -419,6 +422,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
             progressBarCompleted.setProgress(0);
             txtIndividualProgress.setText("0%");
 
+            txtStatus.setText("SYNCING... PLEASE WAIT...");
             txtCompletedA.setText("0 of " + count_allImages);
             txtCompletedB.setText("0 of " + count_allImages);
             super.onPreExecute();
@@ -445,6 +449,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
                     Log.d("Image Name " + content_ctr, d.ImageName);
                     Log.d("Image Path " + content_ctr, d.ImagePath);
                     Log.d("Image Url " + content_ctr, d.UrlOfServer);
+
 
                     code = uploadFile(d);
                     Thread.sleep(3000);
@@ -479,12 +484,12 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
             try {
                 AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
-                        new AndroidMultiPartEntity.ProgressListener() {
-                            @Override
-                            public void transferred(long num) {
-                                publishProgress((int) ((num / (float) totalSize) * 100));
-                            }
-                        });
+                    new AndroidMultiPartEntity.ProgressListener() {
+                        @Override
+                        public void transferred(long num) {
+                            publishProgress( (int) ((num / (float) totalSize) * 100));
+                        }
+                });
 
                 BackgroundWorker.IMAGE_TEMP = data.ImagePath;
                 File sourceFile = new File(BackgroundWorker.IMAGE_TEMP);
@@ -507,6 +512,7 @@ public class SyncCATPALActivity extends AppCompatActivity {
                         additional.YardId_BoxId = data.BoxId;
                         additional.ParentImageName = values[1];
                         additional.ChildImageName = data.ImageName;
+                        additional.ChildImagePath = data.ImagePath;
                         Additional_Data.add(additional);
                     }
                     else {
@@ -598,10 +604,20 @@ public class SyncCATPALActivity extends AppCompatActivity {
                 BGWorker.RemoveToImageList(grade.ImagePath);
                 content_ctr++;
 
-                Log.d("INSIDE_LOOP", "" + content_ctr);
+                Log.d("INSIDE_LOOP_UNIT", "" + content_ctr);
             }
 
-            Log.d("OUTSIDE_LOOP", "" + "x");
+            content_ctr = 0;
+            for (AdditionalContentObject additional : Additional_Data) {
+                Log.d("Box Id " + content_ctr, additional.YardId_BoxId);
+
+                BGWorker.RemoveToImageList(additional.ChildImagePath);
+                content_ctr++;
+
+                Log.d("INSIDE_LOOP_ADDITIONAL", "" + content_ctr);
+            }
+
+            Log.d("OUTSIDE_LOOP", "DONE DELETE BG");
             result = null;
             return result;
         }

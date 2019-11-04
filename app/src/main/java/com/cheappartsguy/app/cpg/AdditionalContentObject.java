@@ -6,5 +6,6 @@ public class AdditionalContentObject {
     public String YardId_BoxId;
     public String ParentImageName;
     public String ChildImageName;
+    public String ChildImagePath;
 
 }

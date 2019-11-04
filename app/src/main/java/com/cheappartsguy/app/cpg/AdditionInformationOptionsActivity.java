@@ -61,6 +61,8 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
 
         CreatedDB();
 
+        ImageViewActivity.AdditionalPhotoDir = false;
+
         btnBack = (LinearLayout) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,10 +187,15 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
 
     public static void drop_barcode_table() {
 
-        Cursor c = mysql.select("SELECT * FROM list_of_barcode;");
+        try {
+            Cursor c = mysql.select("SELECT * FROM list_of_barcode;");
 
-        if(c.getCount() > 0) {
-            mysql.execute("DROP TABLE IF EXISTS list_of_barcode;", true);
+            if(c.getCount() > 0) {
+                mysql.execute("DROP TABLE IF EXISTS list_of_barcode;", true);
+            }
+        }
+        catch (Exception ex) {
+
         }
     }
 
