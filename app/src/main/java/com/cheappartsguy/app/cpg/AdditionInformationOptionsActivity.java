@@ -69,6 +69,10 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Config.IsParentImageName = null;
+                Config.totalAdditionalPhoto = 0;
+                Config.IsParentImage = true;
                 Intent i = new Intent(getApplicationContext(), ToolOptionCATPALActivity.class);
                 startActivity(i);
                 finish();
@@ -79,6 +83,10 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnAddAdditionalUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Config.IsParentImageName = null;
+                Config.totalAdditionalPhoto = 0;
+                Config.IsParentImage = true;
                 Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);
                 startActivity(i);
                 finish();
@@ -89,6 +97,12 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnBarCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(Config.IsParentImageName ==  null) {
+                    showDialogForDynamicError(AdditionInformationOptionsActivity.this, "ERROR ALERT", "No parent image found, please restart the app.");
+                    return;
+                }
+
                 scanQR(view, "");
             }
         });
@@ -98,15 +112,16 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Config.IsParentImage = false;
+                ImageViewActivity.AdditionalPhotoDir = true;
                 Config.totalAdditionalPhoto++;
+
                 Log.d("totalAdditionalPhoto", Config.totalAdditionalPhoto + "");
                 if(Config.totalAdditionalPhoto > 10) {
-
                     showDialogForDynamicError(AdditionInformationOptionsActivity.this, "ERROR ALERT", "You are limited to 10 Additional Photos per 1 Unit.");
                     return;
                 }
 
-                ImageViewActivity.AdditionalPhotoDir = true;
                 Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);
                 startActivity(i);
                 finish();
@@ -117,6 +132,12 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
         btnAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(Config.IsParentImageName ==  null) {
+                    showDialogForDynamicError(AdditionInformationOptionsActivity.this, "ERROR ALERT", "No parent image found, please restart the app.");
+                    return;
+                }
+
                 Intent i = new Intent(getApplicationContext(), AddCommentMessageActivity.class);
                 startActivity(i);
                 finish();
@@ -177,15 +198,15 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
                         message_, 0,
                         "YES, SAVE IT", "NO, DISCARD IT", 103);
 
-                String value = "'" + Config.Worker_uid.toString() + "', '" + Config.ImageName + "', '" + SCAN_RESULT + "'";
-                Log.d("QUERY_INSERT", value);
 
             }
         }
     }
 
-    public void save_bardcode() {
-        mysql.insert("list_of_barcode", SCAN_RESULT);
+    public void save_barcode() {
+        String value = "'" + Config.Worker_uid.toString() + "', '" + Config.IsParentImageName + "', '" + SCAN_RESULT + "'";
+        Log.d("QUERY_INSERT", value);
+        mysql.insert("list_of_barcode", value);
 
         Cursor c = mysql.select("SELECT * FROM list_of_barcode;");
 
@@ -219,7 +240,7 @@ public class AdditionInformationOptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                save_bardcode();
+                save_barcode();
 
                 showDialogForDynamicNotification(AdditionInformationOptionsActivity.this, "BARCODE SCANNED INFORMATION", "Barcode was added successful.");
             }

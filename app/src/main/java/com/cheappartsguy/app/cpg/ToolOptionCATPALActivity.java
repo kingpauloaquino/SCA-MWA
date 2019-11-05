@@ -130,6 +130,7 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
 
         Config.totalAdditionalPhoto = 0;
         ImageViewActivity.AdditionalPhotoDir = false;
+        Config.IsParentImageName = null;
 
         app_context = getApplicationContext();
         ScreenCheckSizeIfUsing10Inches = Config.getScreenOfTablet(getApplicationContext());
@@ -176,7 +177,9 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Config.totalAdditionalPhoto = 0;
                 BackgroundService.stopBackgroundWorker = true;
+                Config.IsParentImage = true;
 
                 isQRCode = true;
                 view_ = view;

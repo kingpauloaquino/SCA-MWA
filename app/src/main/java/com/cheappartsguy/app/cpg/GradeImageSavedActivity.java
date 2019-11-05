@@ -48,6 +48,11 @@ public class GradeImageSavedActivity extends AppCompatActivity {
         btnFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Config.IsParentImageName = null;
+                Config.totalAdditionalPhoto = 0;
+                Config.IsParentImage = true;
+
                 Intent i = new Intent(getApplicationContext(), ToolOptionCATPALActivity.class);
                 startActivity(i);
                 finish();
@@ -68,6 +73,10 @@ public class GradeImageSavedActivity extends AppCompatActivity {
         btnAddAnotherUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Config.IsParentImageName = null;
+                Config.totalAdditionalPhoto = 0;
+                Config.IsParentImage = true;
 
                 ImageViewActivity.IsPreviewFullScreen = false;
                 Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);

@@ -80,6 +80,7 @@ public class ImageViewActivity extends AppCompatActivity  {
     private ProgressDialog pDialog;
     public boolean IsOkay;
 
+
     // LogCat tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -107,7 +108,6 @@ public class ImageViewActivity extends AppCompatActivity  {
 //    public static String ImageName = null;
     public static String ContentValue = null;
     public static boolean AdditionalPhotoDir = false;
-    public static String ParentImages;
 
 
     public int ScreenCheckSizeIfUsing10Inches;
@@ -329,8 +329,7 @@ public class ImageViewActivity extends AppCompatActivity  {
         if(AdditionalPhotoDir) {
 
             Log.d("Additional-Photo", filePath);
-
-            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name, ParentImages.replace(".", "-") )) {
+            if(Config.save_additiona_image(Config.ImageFile, Config.dir_parent_folder_name, Config.IsParentImageName.replace(".", "-") )) {
                 Intent i = new Intent(getApplicationContext(), AdditionInformationOptionsActivity.class);
                 startActivity(i);
                 finish();
@@ -390,11 +389,17 @@ public class ImageViewActivity extends AppCompatActivity  {
             Config.ImageFile = mediaStorageDir.getPath() + File.separator + Config.ImageName;
             mediaFile = new File(Config.ImageFile);
 
+            if(Config.IsParentImage) {
+                Config.IsParentImageName = Config.Device_UID + timeStamp + ".jpg";
+            }
+
         }else {
             return null;
         }
         return mediaFile;
     }
+
+
 
 
     // uploading images

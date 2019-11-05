@@ -32,6 +32,8 @@ public class Config {
 
     public static String Device_UID;
     public static int totalAdditionalPhoto;
+    public static boolean IsParentImage;
+    public static String IsParentImageName;
 
     public static List<ObjectNames> ObjectNamesList;
 
@@ -191,6 +193,30 @@ public class Config {
         SharedPreferences mysharedpred = activity.getSharedPreferences("MySharedPrefTrans", Context.MODE_PRIVATE);
         mysharedpred.edit().clear().commit();
     }
+
+
+
+
+    ////
+
+
+    public static void current_parent_commit(Activity activity, String key, String value) {
+        sharedPref = activity.getSharedPreferences("ImageParentName", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String current_parent_value(Activity activity, String key) {
+        sharedPref = activity.getSharedPreferences("ImageParentName", Context.MODE_PRIVATE);
+        return sharedPref.getString(key, "");
+    }
+
+    public static void current_parent_clear(Activity activity) {
+        SharedPreferences mysharedpred = activity.getSharedPreferences("ImageParentName", Context.MODE_PRIVATE);
+        mysharedpred.edit().clear().commit();
+    }
+
 
     public static boolean hostAvailableisOnline() {
         Runtime runtime = Runtime.getRuntime();

@@ -583,7 +583,15 @@ public class SyncCATPALActivity extends AppCompatActivity {
     // grade content
 
     public void do_upload_comments() {
-        new doContentImageGrade().execute();
+
+        try {
+            Thread.sleep(1000);
+
+            new doContentImageGrade().execute();
+        }
+        catch (Exception ex) {
+
+        }
     }
 
     public class doContentImageGrade extends AsyncTask<Void, Void, String> {
@@ -650,113 +658,18 @@ public class SyncCATPALActivity extends AppCompatActivity {
     }
 
     public void do_comment_process() {
-        new submitComment().execute();
+
+        try {
+            Thread.sleep(1000);
+
+            new submitComment().execute();
+        }
+        catch (Exception ex) {
+
+        }
     }
 
     // process comment
-
-    private class submitComment3 extends AsyncTask<Void, Integer, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            String result = null;
-            content_ctr = 0;
-            Cursor c = mysql.select("SELECT * FROM list_of_comments;");
-            while (c.moveToNext()) {
-                Log.d("box_id", "" + c.getString(0));
-                Log.d("worker_id", "" + c.getString(1));
-                Log.d("image_name", "" + c.getString(2));
-                Log.d("comment", "" + c.getString(3));
-
-                if (c.getString(3).length() > 0) {
-                    String ImageName = "mobile_m_" + c.getString(2);
-                    String Comments = c.getString(3);
-
-                    Log.d("ImageName", ImageName);
-
-                    do_execute(c.getString(0), c.getString(1), ImageName, Comments);
-                }
-
-                Log.d("INSIDE_LOOP", "" + content_ctr);
-            }
-            Log.d("OUTSIDE_LOOP", "" + "x");
-            result = null;
-            return result;
-        }
-
-        public String do_execute(String BoxId, String WorkerId, String ImageName, String Comment) {
-            // TODO: attempt authentication against a network service.
-            String json = null;
-            try {
-                // RONALD CHANGE POSTING OF COMMENTS TO POST METHOD TO ACCOMODATE LONG COMMENTS AND SPECIAL CHARACTER
-                HttpClient httpClient = new DefaultHttpClient();
-                // replace with your url + Config.Token
-                //String url = Config.Host + Config.Url_post_comment + Config.Token + "/" + BoxId + "/" + ImageName + "/" + WorkerId +"/" + Comment;
-
-                String url = Config.Host + "/api/v2/cats_comments_mobile";
-
-                Log.d("URL", url);
-
-                HttpPost httpPost = new HttpPost(url);
-
-                //Log.d("Http Post COMMENTS:", Config.Host + "/api/v2/cats_comments_mobile/");
-                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-                Log.d("Http Post COMMENTS:", Comment);
-                nameValuePair.add(new BasicNameValuePair("cats_images_name", ImageName));
-                nameValuePair.add(new BasicNameValuePair("user_id", WorkerId));
-                nameValuePair.add(new BasicNameValuePair("comments", Comment.replace(".jpg", "-jpg")));
-                //Encoding POST data
-                try {
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-                } catch (UnsupportedEncodingException e) {
-                    // log exception
-                    e.printStackTrace();
-                }
-
-                Log.d("Name Pair:", Comment);
-
-                //POST data
-                try {
-                    Log.d("Http Post Inside:", "HTTP POSTING");
-                    HttpResponse response = httpClient.execute(httpPost);
-                    String server_response = EntityUtils.toString(response.getEntity());
-
-                    Log.i("Server response", server_response);
-
-                    int status = Integer.parseInt(server_response);
-                    Log.d("Http Post after:", server_response);
-
-                    if (status == 202) {
-                        String query = "DELETE FROM list_of_comments WHERE box_id = '" + BoxId + "';";
-                        boolean xStatus = mysql.execute(query, true);
-                        Log.d("Name: ", "" + xStatus);
-                    } else {
-                        Log.d("Name: ", "Error");
-                    }
-                    return json;
-                } catch (UnsupportedEncodingException e) {
-                    // log exception
-                    e.printStackTrace();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // TODO: register the new account here.
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String json) {
-            new submitBarcode().execute();
-            super.onPostExecute(json);
-        }
-    }
 
     private class submitComment extends AsyncTask<Void, Integer, String> {
         @Override
@@ -815,12 +728,41 @@ public class SyncCATPALActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final String json) {
-            new submitBarcode().execute();
-
-            super.onPostExecute(json);
+            done_comments_sync();
         }
     }
 
+    public void done_comments_sync() {
+        String messages = "ScrapCATapp Synch Process Result:\n\n";
+        messages += "Fullness grade and Comment Successfully Synched\n";
+        messages += "Press OK to Synch Additional Information.";
+
+        int resize_screen = 460;
+        if (ScreenCheckSizeIfUsing10Inches == 1) {
+            resize_screen = 650;
+        } else if (ScreenCheckSizeIfUsing10Inches == 2) {
+            resize_screen = 910;
+        }
+
+        Log.d("SCREEN_XX", resize_screen + "");
+
+        showDialogForDynamic(
+                SyncCATPALActivity.this,
+                "SYNCH UNIT PHOTO AND INFORMATION",
+                messages, resize_screen, 175, true);
+    }
+
+    public void do_submitBardCode() {
+
+        try {
+            Thread.sleep(1000);
+
+            new submitBarcode().execute();
+        }
+        catch (Exception ex) {
+
+        }
+    }
 
     private class submitBarcode extends AsyncTask<Void, Integer, String> {
         @Override
@@ -1006,6 +948,12 @@ public class SyncCATPALActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), ToolOptionCATPALActivity.class);
                     startActivity(i);
                     finish();
+                    return;
+                }
+
+                if (number == 175) {
+                    do_submitBardCode();
+                    dialog.dismiss();
                     return;
                 }
             }

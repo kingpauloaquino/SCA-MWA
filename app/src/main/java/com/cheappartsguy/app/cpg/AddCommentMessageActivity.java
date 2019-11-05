@@ -185,7 +185,7 @@ public class AddCommentMessageActivity extends AppCompatActivity {
         mysql = new MySqlLite(sqlDB);
 
         //boolean result = mysql.insert("list_of_comments", "'" + Config.get_box_id + "', '" + Config.Worker_uid + "', '" + Config.ImageName + "', '" + _comments + "'"); REMARKS BY RONALD MAY 21, 2018 BELOW SUPPORT MULTIPLE COMMENT LINES AND SPECIAL CHARACTER
-        boolean result = mysql.insert("list_of_comments", "'" + Config.get_box_id + "', '" + Config.Worker_uid + "', '" + Config.ImageName  + "', '" + EncodeComments + "'"); // PREVIOUS VARIABLE _comments 12/15/2017
+        boolean result = mysql.insert("list_of_comments", "'" + Config.get_box_id + "', '" + Config.Worker_uid + "', '" + Config.IsParentImageName  + "', '" + EncodeComments + "'"); // PREVIOUS VARIABLE _comments 12/15/2017
 
         if(result) {
             GradeImageSavedActivity.AppTitleText = "SAVE COMMENT CONFIRMATION";

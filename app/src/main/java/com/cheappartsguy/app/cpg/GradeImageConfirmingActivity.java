@@ -80,8 +80,6 @@ public class GradeImageConfirmingActivity extends AppCompatActivity {
                 }
 
                 if(Config.save_image(Config.ImageFile, Config.dir_parent_folder_name, GradedId)) {
-
-                    ImageViewActivity.ParentImages = Config.ImageName;
                     Config.transfer_commit(GradeImageConfirmingActivity.this, "LastImage", Config.dir_new_parent_folder_name + "/" + Config.ImageName);
                     Intent i = new Intent(getApplicationContext(), GradeImageSavedActivity.class);
                     startActivity(i);
