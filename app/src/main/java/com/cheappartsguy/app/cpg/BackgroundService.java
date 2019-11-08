@@ -41,11 +41,15 @@ public class BackgroundService extends IntentService {
     public static int laps  = 1;
     public String API_URL;
 
+    public static boolean IsProcessing;
+
     public BackgroundService() {
         super(BackgroundService.class.getName());
         isRunning = false;
         Log.i(TAG, "Service onCreate");
         API_URL = Config.Host + Config.Url_get_all_boxes + Config.Token + "/" + Config.Worker_uid;
+
+        IsProcessing = true;
     }
 
     @Override
@@ -164,6 +168,11 @@ public class BackgroundService extends IntentService {
                     mysql.insert("list_of_boxes", "'" + box_uid + "', '" + worker_id + "', '" + yard_id + "', '" + box_id + "', '" + box_code + "', '" + box_status + "'");
                 }
 
+                isRunning = false;
+                laps = 60 * 120;
+                counter = 0;
+                IsProcessing = false;
+
                 return;
 
             }catch(Exception e)
@@ -175,6 +184,7 @@ public class BackgroundService extends IntentService {
         isRunning = false;
         laps = 60 * 120;
         counter = 0;
+        IsProcessing = false;
     }
 
     private void loaderShow(String Message) {

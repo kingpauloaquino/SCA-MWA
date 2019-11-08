@@ -66,9 +66,9 @@ public class LoginCATPALActivity extends AppCompatActivity {
         btnSettingsDrawer = (ImageView) findViewById(R.id.btnSettings_drawer);
 
 //        Config.radioSelectedElement = 2;
-//        Config.transfer_commit(this, "API_URL", "http://api.scrapcatapp.com");
+        Config.transfer_commit(this, "API_URL", "http://api.scrapcatapp.com");
 //        Config.transfer_commit(this, "API_URL", "http://staging-api.scrapcatapp.com");
-//        Config.transfer_commit(this, "IMAGES_URL", "http://img.scrapcatapp.com");
+        Config.transfer_commit(this, "IMAGES_URL", "http://img.scrapcatapp.com");
 
         Config.Host = Config.transfer_value(this, "API_URL");
         Config.Images_Host = Config.transfer_value(this, "IMAGES_URL");
@@ -130,7 +130,6 @@ public class LoginCATPALActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(i);
                 finish();
-                //showForgotDialog();
             }
         });
     }
@@ -303,9 +302,16 @@ public class LoginCATPALActivity extends AppCompatActivity {
 
                     Config.JustLogged = true;
                     Config.commit_login(LoginCATPALActivity.this, email, password, worker_id, worker_name, seller_id);
-                    Intent i = new Intent(getApplicationContext(), ToolOptionCATPALActivity.class);
+//                    Intent i = new Intent(getApplicationContext(), ToolOptionCATPALActivity.class);
+//                    startActivity(i);
+//                    finish();
+
+
+                    Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     finish();
+
                     return;
                 } else {
                     showDialogForDynamicError(

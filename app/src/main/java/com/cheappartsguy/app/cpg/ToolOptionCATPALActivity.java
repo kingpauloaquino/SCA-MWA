@@ -18,6 +18,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -90,7 +91,29 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
         return sqlDB;
     }
 
+    private Handler handlerChecker = new Handler();
+
+    public void CheckService() {
+
+        loaderShow("Updating System... Please wait...");
+        final Runnable r = new Runnable() {
+            public void run() {
+                if(BackgroundService.IsProcessing) {
+                    Log.d("IsProcessing", "Running");
+                    handlerChecker.postDelayed(this, 1000);
+                }
+                else {
+                    Log.d("IsProcessing", "Stopped");
+                    loaderHide();
+                }
+            }
+        };
+
+        handlerChecker.postDelayed(r, 1000);
+    }
+
     public void InitService() {
+        CheckService();
         CreatedDB();
         BackgroundService.isStop = false;
         Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
@@ -118,9 +141,9 @@ public class ToolOptionCATPALActivity extends AppCompatActivity {
         titleTxtView.setText(Config.getAppName("DASHBOARD"));
         txtAccount.setText(Config.Worker_name);
 
-        if (Config.JustLogged) {
-            InitService();
-        }
+//        if (Config.JustLogged) {
+//            InitService();
+//        }
 
         boolean isServiceRunning = BackgroundService.isRunning;
         Log.d("Is Service Running", "" + isServiceRunning);
