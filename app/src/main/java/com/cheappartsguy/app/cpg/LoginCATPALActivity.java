@@ -66,9 +66,9 @@ public class LoginCATPALActivity extends AppCompatActivity {
         btnSettingsDrawer = (ImageView) findViewById(R.id.btnSettings_drawer);
 
 //        Config.radioSelectedElement = 2;
-        Config.transfer_commit(this, "API_URL", "http://api.scrapcatapp.com");
+        Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
 //        Config.transfer_commit(this, "API_URL", "http://staging-api.scrapcatapp.com");
-        Config.transfer_commit(this, "IMAGES_URL", "http://img.scrapcatapp.com");
+        Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
 
         Config.Host = Config.transfer_value(this, "API_URL");
         Config.Images_Host = Config.transfer_value(this, "IMAGES_URL");

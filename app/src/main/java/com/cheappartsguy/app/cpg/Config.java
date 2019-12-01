@@ -278,7 +278,7 @@ public class Config {
     }
 
     // File upload url (replace the ip with your server address)
-    public static final String FILE_UPLOAD_URL = "http://img.scrapcatapp.com/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part=21212121&edited=NOT";
+    public static final String FILE_UPLOAD_URL = "https://img2.scrapcatapp.com/CPGU/upload_process.php?ref=mobile_m&uid=mobile_m&part=21212121&edited=NOT";
 
     // Directory name to store captured images and videos
     public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
@@ -293,8 +293,8 @@ public class Config {
     public static int radioSelectedElement=-1;
 
     public static String Token = "795edd365fd0e371ceaaf1ddd559a85d";
-    public static String Host = "http://api.local.scrapcatapp.com"; // default
-    public static String Images_Host = "http://img.scrapcatapp.com"; // defualt
+    public static String Host = "https://api.scrapcatapp.com"; // default
+    public static String Images_Host = "https://img2.scrapcatapp.com"; // defualt
 
     public static String Images_Host_Dev = "http://192.168.1.203";
 
