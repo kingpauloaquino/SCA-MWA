@@ -67,7 +67,7 @@ public class LoginCATPALActivity extends AppCompatActivity {
 
 //        Config.radioSelectedElement = 2;
 //        Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
-        Config.transfer_commit(this, "API_URL", "https://test-api.scrapcatapp.com");
+        Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
         Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
 
         Config.Host = Config.transfer_value(this, "API_URL");
