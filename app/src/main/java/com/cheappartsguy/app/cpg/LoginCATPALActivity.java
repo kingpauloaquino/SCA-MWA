@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -65,10 +66,21 @@ public class LoginCATPALActivity extends AppCompatActivity {
 
         btnSettingsDrawer = (ImageView) findViewById(R.id.btnSettings_drawer);
 
+
+        boolean isDebuggable =  ( 0 != ( getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE ) );
+
+        if(isDebuggable) {
+            Config.transfer_commit(this, "API_URL", "https://sca-api-test1.scrapcat.net");
+            Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
+        }
+        else {
+            Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
+            Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
+        }
+
+        Log.d("status", isDebuggable == true ? "debug" : "production");
+
 //        Config.radioSelectedElement = 2;
-//        Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
-        Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
-        Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
 
         Config.Host = Config.transfer_value(this, "API_URL");
         Config.Images_Host = Config.transfer_value(this, "IMAGES_URL");
