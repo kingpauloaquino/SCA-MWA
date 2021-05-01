@@ -70,11 +70,12 @@ public class LoginCATPALActivity extends AppCompatActivity {
         boolean isDebuggable =  ( 0 != ( getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE ) );
 
         if(isDebuggable) {
-            Config.transfer_commit(this, "API_URL", "https://sca-api-test1.scrapcat.net");
+            Config.transfer_commit(this, "API_URL", "http://sca-api-live1.scrapcat.net");
             Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
         }
         else {
-            Config.transfer_commit(this, "API_URL", "https://api.scrapcatapp.com");
+            Config.transfer_commit(this, "API_URL", "http://sca-api-live1.scrapcat.net");
+//            Config.transfer_commit(this, "API_URL", "https://sca-api-test1.scrapcat.net");
             Config.transfer_commit(this, "IMAGES_URL", "https://img2.scrapcatapp.com");
         }
 
